@@ -1,6 +1,7 @@
 package com.devuger.common.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +26,12 @@ public class User extends AbstractEntity implements Serializable {
   private String username;
   @Column(nullable=false, length=255)
   private String hashedPassword;
+  @Column(nullable=false, length=255)
+  private String token;
+  @Column(nullable=false)
+  private Date lastSigninDate;
+  @Column(nullable=false, length=20)
+  private String lastSigninIp;
   @Transient
   private String hashedPasswordConfirm;
   @Transient
@@ -68,5 +75,22 @@ public class User extends AbstractEntity implements Serializable {
   public void setUserInfoTerms(boolean userInfoTerms) {
     this.userInfoTerms = userInfoTerms;
   }
-
+  public String getToken() {
+    return token;
+  }
+  public void setToken(String token) {
+    this.token = token;
+  }
+  public Date getLastSigninDate() {
+    return lastSigninDate;
+  }
+  public void setLastSigninDate(Date lastSigninDate) {
+    this.lastSigninDate = lastSigninDate;
+  }
+  public String getLastSigninIp() {
+    return lastSigninIp;
+  }
+  public void setLastSigninIp(String lastSigninIp) {
+    this.lastSigninIp = lastSigninIp;
+  }
 }
