@@ -44,22 +44,6 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 	</div>
 
 	<footer>
-		<div class="row">
-
-			<hr />
-
-			<div class="col-xs-12">
-
-				<ul class="list-unstyled">
-					<li><a href="${contextPath}/terms/service">서비스이용약관</a></li>
-					<li><a href="${contextPath}/terms/user">개인정보취급방침</a></li>
-					<li><a href="${contextPath}/terms/seller">판매회원약관</a></li>
-					<li><a href="${contextPath}/help">도움말</a></li>
-					<li class="pull-right"><a href="#top">맨 위로</a></li>
-				</ul>
-			</div>
-
-		</div>
 
 		<div class="row">
 			<div class="col-xs-12">

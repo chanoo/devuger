@@ -6,7 +6,7 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+  http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
 	<jpa:repositories base-package="com.devuger.common.repositories" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
@@ -40,9 +40,6 @@
    	            <prop key="hibernate.hbm2ddl.auto">update</prop>
    	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
   	            <prop key="org.hibernate.flushMode">COMMIT</prop>
-<!--   	            <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
-  	            <prop key="hibernate.cache.use_second_level_cache">true</prop>
-                <prop key="hibernate.cache.use_query_cache">true</prop> -->
          	</props>
         </property>
     </bean>

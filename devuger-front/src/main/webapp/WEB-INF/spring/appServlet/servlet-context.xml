@@ -48,7 +48,8 @@
 		
 	<interceptors>
 		<interceptor>
-			<mapping path="/**" />
+			<mapping path="/users" />
+			<mapping path="/feeds" />
 			<beans:bean class="com.devuger.front.interceptor.LoggingHandlerInterceptor" />			
 		</interceptor>
 	</interceptors>
@@ -91,15 +92,15 @@
 	</beans:bean>
 	
 	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<beans:property name="host" value="smtp.popchoice.co.kr" />
+		<beans:property name="host" value="smtp.mail.yahoo.com" />
 		<beans:property name="protocol" value="smtp" />
 		<beans:property name="port" value="25" />
-		<beans:property name="username" value="no-reply@popchoice.co.kr" />
-		<beans:property name="password" value="cs5086631@" />
+		<beans:property name="username" value="no-reply@devuger" />
+		<beans:property name="password" value="devuger" />
 		<beans:property name="defaultEncoding" value="UTF-8" />
 		<beans:property name="javaMailProperties">
 			<beans:props>
-				<beans:prop key="mail.smtps.auth">true</beans:prop>
+				<beans:prop key="mail.smtps.auth">false</beans:prop>
 				<beans:prop key="mail.smtps.starttls.enable">true</beans:prop>
 				<beans:prop key="mail.smtps.debug">true</beans:prop>
 			</beans:props>

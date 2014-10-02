@@ -20,15 +20,11 @@
 <meta property="og:description" content="${og.description}" />
 </c:if>	
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="naver-site-verification" content="13d98f33dde0ef85a1c5c3fce11cf6d6a65cc2b5"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css" />" />
-<link rel="stylesheet" href="<c:url value="/resources/assets/docs.css" />" />
 <link rel="stylesheet" href="<c:url value="/resources/css/flag-icon.min.css" />" />
+<link rel="stylesheet" href="<c:url value="/resources/style/bootstrap.min.css" />" >
+<link rel="stylesheet" href="<c:url value="/resources/style/custom.css" />">
 <link rel="stylesheet" href="http://bootswatch.com/assets/css/bootswatch.min.css">
-<link rel="stylesheet" href="<c:url value="/resources/style/bootstrap.css" />">
-<link rel="stylesheet" href="<c:url value="/resources/style/colorbox/colorbox.css" />">
-<link rel="stylesheet" href="<c:url value="/resources/style/wookmark/main.css" />">
-<link rel="stylesheet" href="<c:url value="/resources/style/responsiveslides.css" />">
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.11.1.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/imagesloaded.pkgd.min.js"/>"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

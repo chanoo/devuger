@@ -7,12 +7,12 @@
 	<shortname>hello</shortname>
 	<uri>http://wimitt.com/taglib</uri>
 	<info>
-		FastBall Tag Lib
+		devuger Tag Lib
 	</info>
 	
 	<tag>
 		<name>pagination</name>
-		<tagclass>com.fastball.common.support.tag.PageNavigationTag</tagclass>
+		<tagclass>com.devuger.common.support.tag.PageNavigationTag</tagclass>
 		<info>Page Navigation</info>
 		<attribute>
 			<name>currentPage</name>
@@ -37,7 +37,7 @@
 	</tag>
 	<tag>
 		<name>date</name>
-		<tagclass>com.fastball.common.support.tag.DateFormatTag</tagclass>
+		<tagclass>com.devuger.common.support.tag.DateFormatTag</tagclass>
 		<info>Date Format</info>
 		<attribute>
 			<name>dateString</name>
@@ -47,7 +47,7 @@
 	</tag>
 	<tag>
 		<name>time</name>
-		<tagclass>com.fastball.common.support.tag.TimeFormatTag</tagclass>
+		<tagclass>com.devuger.common.support.tag.TimeFormatTag</tagclass>
 		<info>Time Format</info>
 		<attribute>
 			<name>timeString</name>
@@ -57,7 +57,7 @@
 	</tag>
 	<tag>
 		<name>telephone</name>
-		<tagclass>com.fastball.common.support.tag.TelephoneNoFormatTag</tagclass>
+		<tagclass>com.devuger.common.support.tag.TelephoneNoFormatTag</tagclass>
 		<info>Telephone No Format</info>
 		<attribute>
 			<name>phoneNo</name>
@@ -67,7 +67,7 @@
 	</tag>
 	<tag>
 		<name>maskedTelephone</name>
-		<tagclass>com.fastball.common.tag.MaskedTelephoneNoFormatTag</tagclass>
+		<tagclass>com.devuger.common.tag.MaskedTelephoneNoFormatTag</tagclass>
 		<info>Telephone Masked No Format</info>
 		<attribute>
 			<name>phoneNo</name>
