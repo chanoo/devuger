@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+    "http://java.sun.com/j2ee/dtd/web-jsptaglibrary_1_1.dtd">
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.1</jspversion>
+	<shortname>hello</shortname>
+	<uri>http://wimitt.com/taglib</uri>
+	<info>
+		FastBall Tag Lib
+	</info>
+	
+	<tag>
+		<name>pagination</name>
+		<tagclass>com.fastball.common.support.tag.PageNavigationTag</tagclass>
+		<info>Page Navigation</info>
+		<attribute>
+			<name>currentPage</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>lastPage</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>totalElements</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>pageSize</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>date</name>
+		<tagclass>com.fastball.common.support.tag.DateFormatTag</tagclass>
+		<info>Date Format</info>
+		<attribute>
+			<name>dateString</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>time</name>
+		<tagclass>com.fastball.common.support.tag.TimeFormatTag</tagclass>
+		<info>Time Format</info>
+		<attribute>
+			<name>timeString</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>telephone</name>
+		<tagclass>com.fastball.common.support.tag.TelephoneNoFormatTag</tagclass>
+		<info>Telephone No Format</info>
+		<attribute>
+			<name>phoneNo</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>maskedTelephone</name>
+		<tagclass>com.fastball.common.tag.MaskedTelephoneNoFormatTag</tagclass>
+		<info>Telephone Masked No Format</info>
+		<attribute>
+			<name>phoneNo</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

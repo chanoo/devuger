@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+	<!-- 임시 레이아웃 -->
+	<definition name="default.layout" template="/WEB-INF/tiles/default.layout.jsp">
+		<put-attribute name="layout.head" value="/WEB-INF/tiles/head.jsp"></put-attribute>
+		<put-attribute name="layout.navbar" value="/WEB-INF/tiles/navbar.jsp"></put-attribute>
+		<put-attribute name="layout.foot" value="/WEB-INF/tiles/foot.jsp"></put-attribute>
+		<put-attribute name="layout.content" value=""></put-attribute>
+	</definition>
+
+	<definition name="none.layout" template="/WEB-INF/tiles/none.layout.jsp">
+		<put-attribute name="layout.head" value="/WEB-INF/tiles/head.jsp"></put-attribute>
+		<put-attribute name="layout.foot" value="/WEB-INF/tiles/foot.jsp"></put-attribute>
+		<put-attribute name="layout.content" value=""></put-attribute>
+	</definition>
+
+	<definition name="frame.layout" template="/WEB-INF/tiles/frame.layout.jsp">
+		<put-attribute name="layout.head" value="/WEB-INF/tiles/head.jsp"></put-attribute>
+		<put-attribute name="layout.foot" value="/WEB-INF/tiles/foot.jsp"></put-attribute>
+		<put-attribute name="layout.content" value=""></put-attribute>
+	</definition>
+
+	<definition name="none.*" extends="none.layout">
+		<put-attribute name="layout.navbar" value="/WEB-INF/tiles/navbar.jsp"></put-attribute>
+		<put-attribute name="layout.content" value="/WEB-INF/views/none.{1}.jsp"></put-attribute>
+	</definition>
+
+	<definition name="none/*" extends="none.layout">
+		<put-attribute name="layout.navbar" value="/WEB-INF/tiles/navbar.jsp"></put-attribute>
+		<put-attribute name="layout.content" value="/WEB-INF/views/none/{1}.jsp"></put-attribute>
+	</definition>
+
+	<definition name="frame.*" extends="frame.layout">
+		<put-attribute name="layout.content" value="/WEB-INF/views/frame.{1}.jsp"></put-attribute>
+	</definition>
+
+	<definition name="*" extends="default.layout">
+		<put-attribute name="layout.content" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+	</definition>
+
+	<definition name="subscribe" template="/WEB-INF/views/subscribe.jsp" />
+
+</tiles-definitions>

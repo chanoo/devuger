@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" updateCheck="false">   
+    
+    <diskStore path="java.io.tmpdir" />
+
+    <defaultCache 
+    	eternal="false" 
+    	maxElementsInMemory="1000"
+        overflowToDisk="false" 
+        diskPersistent="false" 
+        diskExpiryThreadIntervalSeconds="120"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="600" 
+        memoryStoreEvictionPolicy="LRU"/> 
+        
+     <cache 
+    	name="defaultCache" 
+    	eternal="false"
+        maxElementsInMemory="1000" 
+        overflowToDisk="true" 
+        diskPersistent="false"
+        timeToIdleSeconds="0" 
+        timeToLiveSeconds="600"
+        memoryStoreEvictionPolicy="LRU" />
+        
+     <cache 
+    	name="productCache" 
+    	eternal="false"
+        maxElementsInMemory="10000" 
+        overflowToDisk="true" 
+        diskPersistent="false"
+        timeToIdleSeconds="0" 
+        timeToLiveSeconds="600"
+        memoryStoreEvictionPolicy="LRU" />
+
+     <cache
+    	name="userCache" 
+    	eternal="false"
+        maxElementsInMemory="10000" 
+        overflowToDisk="true" 
+        diskPersistent="false"
+        timeToIdleSeconds="0" 
+        timeToLiveSeconds="600"
+        memoryStoreEvictionPolicy="LRU" />
+
+     <cache
+    	name="attachmentCache" 
+    	eternal="false"
+        maxElementsInMemory="10000" 
+        overflowToDisk="true" 
+        diskPersistent="false"
+        timeToIdleSeconds="0" 
+        timeToLiveSeconds="600"
+        memoryStoreEvictionPolicy="LRU" />
+
+
+	<cache name="org.hibernate.cache.UpdateTimestampsCache"
+		maxElementsInMemory="5000" eternal="true" overflowToDisk="true" />
+
+	<cache name="org.hibernate.cache.StandardQueryCache"
+		maxElementsInMemory="100000" eternal="false" timeToIdleSeconds="6000"
+		timeToLiveSeconds="60000" overflowToDisk="true" />
+        
+</ehcache>
