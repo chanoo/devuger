@@ -8,6 +8,9 @@
 
 <fmt:formatDate pattern="MM/dd/yyyy" value="${comment.createdOn}" />
 
+<c:forEach items="${feeds}" var="feed">
+</c:forEach>
+
 <script>
 $(document).on('click', '.fa-plus', function() {
 	console.log("plus");

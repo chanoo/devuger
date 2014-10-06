@@ -10,7 +10,7 @@
 <!-- 같이 더 멋찌게 만들어 보고 싶다면 메일 주세요! -->
 <!-- hello@8hlab.com -->
 <c:if test="${og eq null}">
-<title>WIMITT - 우리가 만나는 새로운 경험</title>
+<title>Devuger - 코드로 이야기 하는 사람들</title>
 </c:if>
 <c:if test="${og ne null}">
 <title>${og.title} - WIMITT</title>
@@ -20,10 +20,7 @@
 <meta property="og:description" content="${og.description}" />
 </c:if>	
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css" />" />
-<link rel="stylesheet" href="<c:url value="/resources/css/flag-icon.min.css" />" />
 <link rel="stylesheet" href="<c:url value="/resources/style/bootstrap.min.css" />" >
-<link rel="stylesheet" href="<c:url value="/resources/style/custom.css" />">
 <link rel="stylesheet" href="http://bootswatch.com/assets/css/bootswatch.min.css">
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.11.1.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/imagesloaded.pkgd.min.js"/>"></script>

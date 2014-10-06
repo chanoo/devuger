@@ -22,9 +22,9 @@
 		<put-attribute name="layout.content" value=""></put-attribute>
 	</definition>
 
-	<definition name="none.*" extends="none.layout">
+	<definition name="common/*" extends="none.layout">
 		<put-attribute name="layout.navbar" value="/WEB-INF/tiles/navbar.jsp"></put-attribute>
-		<put-attribute name="layout.content" value="/WEB-INF/views/none.{1}.jsp"></put-attribute>
+		<put-attribute name="layout.content" value="/WEB-INF/views/common/{1}.jsp"></put-attribute>
 	</definition>
 
 	<definition name="none/*" extends="none.layout">

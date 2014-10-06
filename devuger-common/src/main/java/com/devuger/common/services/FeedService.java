@@ -2,12 +2,18 @@ package com.devuger.common.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import com.devuger.common.entities.Feed;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseService;
+import com.devuger.common.support.constant.GlobalConst;
 
 @Service
 public class FeedService extends BaseService {
@@ -33,11 +39,15 @@ public class FeedService extends BaseService {
    * @param user
    * @return
    */
-  public List<Feed> getByUser(User user) {
+  public List<Feed> getByUser(User user, int page) {
     // TODO Auto-generated method stub
     Assert.notNull(user, "로그인 해주세요.");
     
-    return feedRepository.findByCreatedBy(user);
+    Order order = new Order(Direction.DESC, "id");
+    Sort sort = new Sort(order);
+    Pageable pageable = new PageRequest(page - 1, GlobalConst.PAGE_SIZE, sort);
+    
+    return feedRepository.findByCreatedBy(user, pageable);
   }
   
 }

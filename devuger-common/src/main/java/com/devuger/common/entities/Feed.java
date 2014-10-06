@@ -1,11 +1,14 @@
 package com.devuger.common.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -25,6 +28,9 @@ public class Feed extends AbstractEntity implements Serializable {
   private String message; // 메시지
   @Column(nullable=false)
   private int likeCount = 0; // 좋아요수
+  @JsonIgnore
+  @OneToMany(mappedBy="feed")
+  private List<Comment> comments;
   public String getTitle() {
     return title;
   }
@@ -42,5 +48,11 @@ public class Feed extends AbstractEntity implements Serializable {
   }
   public void setLikeCount(int likeCount) {
     this.likeCount = likeCount;
+  }
+  public List<Comment> getComments() {
+    return comments;
+  }
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
   }
 }
