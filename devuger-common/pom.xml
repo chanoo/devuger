@@ -13,7 +13,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<commons-dbcp-version>1.4</commons-dbcp-version>
-		<hibernate.version>4.3.5.Final</hibernate.version>
+		<hibernate.version>4.3.6.Final</hibernate.version>
 		<org.springframework.data-version>1.6.1.RELEASE</org.springframework.data-version>
 		<org.apache.tiles.version>2.2.2</org.apache.tiles.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

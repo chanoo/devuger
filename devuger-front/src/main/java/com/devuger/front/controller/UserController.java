@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
@@ -87,30 +88,18 @@ public class UserController extends BaseController {
    * @param user 사용자 정보
    * @return
    */
+  @ResponseBody
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-  public String signin(HttpServletRequest request, HttpServletResponse response, Model model, @ModelAttribute User user, BindingResult bindingResult)
-  {	  
-    //validation code
-    new SigninValidator().validate(user, bindingResult); //validation을 수행한다.
-    if(bindingResult.hasErrors()){ //validation 에러가 있으면,
-      return "none/users.signin";
-    }
+  public BaseResult signin(HttpServletRequest request, HttpServletResponse response, Model model, @ModelAttribute User user)
+  {
+    String email = user.getEmail();
+    String hashedPassword = user.getHashedPassword();
+    String ip = request.getRemoteAddr();
+    user = userService.signin(email, hashedPassword, ip);
 
-    try {
-      String email = user.getEmail();
-      String hashedPassword = user.getHashedPassword();
-      String ip = request.getRemoteAddr();
-      user = userService.signin(email, hashedPassword, ip);
-    } catch (Exception e) {
-      // TODO: handle exception
-      BaseResult baseResult = new BaseResult();
-      baseResult.setResult(GlobalConst.RESULT_SUCESSS);
-      baseResult.setMessage(e.getMessage());
-      model.addAttribute("baseResult", baseResult);
-      return "none/users.signin";
-    }
-
-	  return "redirect:/start";
+    BaseResult baseResult = new BaseResult("로그인되었습니다.");
+    baseResult.addAttribute("user", user);
+	  return baseResult;
 	}
 	
 	/**

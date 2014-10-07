@@ -1,5 +1,7 @@
 package com.devuger.common.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -17,8 +19,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Table(name="comments")
 @JsonInclude(Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class Comment extends AbstractEntity {
+public class Comment extends AbstractEntity implements Serializable {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 46269968577379661L;
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "feed", nullable = false)

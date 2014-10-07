@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.devuger.common.entities.Feed;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
+import com.devuger.common.support.base.BaseResult;
 
 /**
  * Handles requests for the application home page.
@@ -20,6 +22,13 @@ import com.devuger.common.support.base.BaseController;
 @Controller
 public class HomeController extends BaseController {
 	
+  /**
+   * 
+   * 
+   * @param request
+   * @param model
+   * @return
+   */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, Model model) {
 	  
@@ -32,4 +41,5 @@ public class HomeController extends BaseController {
     
 		return "index";
 	}
+
 }

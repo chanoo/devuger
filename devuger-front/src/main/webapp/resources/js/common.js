@@ -31,19 +31,6 @@ function isSuccess(json)
 	return true;
 }
 
-function notyAlert(type, message) {
-    var n = noty({
-        text        : message,
-        type        : type,
-        timeout     : 3000, // delay for closing event. Set false for sticky notifications
-        dismissQueue: true,
-        layout      : 'top',
-        theme       : 'defaultTheme'
-    });
-    
-    return n;
-}
-
 function bindAjax() {
 	$('.ajax').unbind('click').bind('click', function (e) {
 		e.stopPropagation();

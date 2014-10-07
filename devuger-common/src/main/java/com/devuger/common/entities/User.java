@@ -20,10 +20,10 @@ public class User extends AbstractEntity implements Serializable {
    * 
    */
   private static final long serialVersionUID = 1827889442772094376L;
-  @Column(nullable=false, length=255)
-  private String email;
   @Column(nullable=false, length=100)
   private String username;
+  @Column(nullable=false, length=255)
+  private String email;
   @Column(nullable=false, length=255)
   private String hashedPassword;
   @Column(nullable=false, length=255)

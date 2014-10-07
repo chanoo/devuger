@@ -179,3 +179,27 @@ body {
     background-color: rgb(255, 255, 255);
     border-color: rgb(0, 0, 0);    
 }
+
+.btn-facebook {
+  color: #ffffff;
+  background-color: #3b5998;
+  border-color: #3b5998;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #1ab69e;
+  border-color: #1ab69e;
+}
+.btn-facebook:hover,
+.btn-facebook:focus,
+.btn-facebook:active,
+.btn-facebook.active,
+.open > .dropdown-toggle.btn-facebook {
+  color: #ffffff;
+  background-color: #006687;
+  border-color: #004b63;
+}
