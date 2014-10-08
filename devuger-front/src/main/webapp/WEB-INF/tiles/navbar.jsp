@@ -12,7 +12,12 @@
     </div>
 
 		<ul class="nav navbar-nav navbar-right">
+			<c:if test="${user eq null}">
 				<li><a href="#" data-toggle="modal" data-target="#signin-modal">로그인</a></li>		
+			</c:if>
+			<c:if test="${user ne null}">
+				<li><a href="javascript:alert('준비중');">로그아웃</a></li>		
+			</c:if>
 				<li><a href="https://github.com/chanoo/devuger" target="_blank">GitHub</a></li>
 		</ul>
 	</div>
@@ -23,7 +28,7 @@
     <div class="modal-content">
       <div class="modal-body">
       
-				<a href="${contextPath}/fb/signin?redirect=${user.redirect}" target="_top" class="btn btn-facebook btn-block">
+				<a href="${contextPath}/fb/signin?redirect=" target="_top" class="btn btn-facebook btn-block">
 					<span class="fa fa-facebook-square fa-lg"></span>&nbsp;&nbsp;페이스북 로그인
 				</a>
 
@@ -64,7 +69,7 @@
 					</form:form>
 				</div>
 				<a href="${contextPath}/users/find/password" class="btn btn-link">비밀번호를 까먹었어요.</a><br/>
-				<a href="${contextPath}/users/signup?redirect=${user.redirect}" class="btn btn-link">회원가입</a><br/>
+				<a href="${contextPath}/users/signup?redirect=" class="btn btn-link">회원가입</a><br/>
 				
       </div>
     </div>
@@ -89,10 +94,20 @@ $("#signin-form").submit(function() {
 		data : frm,
 		success : function(json, textStatus) {
 			if(json.result != "success") {
+
 			  var $signinmessage = $("#signin-message").clone();
 			  $("span", $signinmessage).text(json.message);
 			  $($signinmessage).css("display", "block");
 			  $($signinmessage).appendTo("#messages");
+
+			} else {
+
+			  $('#signin-modal').modal('hide')
+			  $('#signin-modal').on("hidden.bs.modal", function () {
+			    // do something…
+			    document.location.reload();
+			  });
+
 			}
 		}
 	});

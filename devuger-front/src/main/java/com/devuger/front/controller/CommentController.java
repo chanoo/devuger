@@ -7,11 +7,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.devuger.common.entities.Comment;
+import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
 import com.devuger.common.support.base.BaseResult;
+import com.devuger.front.common.session.UserSession;
 
 /**
  * Handles requests for the application home page.
@@ -21,7 +26,7 @@ import com.devuger.common.support.base.BaseResult;
 public class CommentController extends BaseController {
 
   /**
-   * 코멘트 추가
+   * 코멘트 추가 수행
    * 
    * @param request
    * @param response
@@ -29,11 +34,17 @@ public class CommentController extends BaseController {
    * @return
    * @throws IOException
    */
+  @ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public BaseResult view(HttpServletRequest request, HttpServletResponse response, Model model)
+	public BaseResult add(HttpServletRequest request, HttpServletResponse response, Model model, @ModelAttribute Comment comment)
 	throws IOException {
 		
-	  return new BaseResult("코멘트가 추가되었습니다.");
+    User user = UserSession.isSignin(request);
+    comment = commentService.add(comment, user);
+
+	  BaseResult baseResult = new BaseResult("코멘트가 추가되었습니다.");
+	  baseResult.addAttribute("comment", comment);
+	  return baseResult;
 	}
 	
 }

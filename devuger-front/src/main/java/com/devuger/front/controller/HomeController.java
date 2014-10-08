@@ -23,11 +23,13 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.devuger.common.entities.Attachment;
+import com.devuger.common.entities.Comment;
 import com.devuger.common.entities.Feed;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
@@ -47,7 +49,7 @@ public class HomeController extends BaseController {
    * @return
    */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest request, Model model) {
+	public String home(HttpServletRequest request, Model model, @ModelAttribute Comment comment) {
 	  
 	  int page = ServletRequestUtils.getIntParameter(request, "page", 1);
 

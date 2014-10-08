@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
 import com.devuger.common.support.base.BaseResult;
+import com.devuger.front.common.session.UserSession;
 
 /**
  * 사용자 관련 컨트롤러
@@ -93,6 +94,8 @@ public class UserController extends BaseController {
     String hashedPassword = user.getHashedPassword();
     String ip = request.getRemoteAddr();
     user = userService.signin(email, hashedPassword, ip);
+    
+    UserSession.signin(request, user); // 세션 저장
 
     BaseResult baseResult = new BaseResult("로그인되었습니다.");
     baseResult.addAttribute("user", user);

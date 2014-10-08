@@ -6,6 +6,8 @@ body {
     padding-bottom: 30px;
 }
 
+.clear { margin:0; padding:0; }
+
 .panel-google-plus {
     position: relative;
     border-radius: 0px;

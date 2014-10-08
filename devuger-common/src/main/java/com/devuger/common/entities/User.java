@@ -51,6 +51,10 @@ public class User extends AbstractEntity implements Serializable {
   @OneToMany(mappedBy="createdBy", fetch=FetchType.LAZY) 
   private List<Device> devices;
 
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy="createdBy", fetch=FetchType.LAZY)
+  private List<Comment> comments;
+
   public String getHello() {
     return hello;
   }
@@ -116,5 +120,11 @@ public class User extends AbstractEntity implements Serializable {
   }
   public void setDevices(List<Device> devices) {
     this.devices = devices;
+  }
+  public List<Comment> getComments() {
+    return comments;
+  }
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
   }
 }

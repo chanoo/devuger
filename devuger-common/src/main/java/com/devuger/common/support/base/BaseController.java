@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devuger.common.services.AttachmentService;
+import com.devuger.common.services.CommentService;
 import com.devuger.common.services.DeviceService;
 import com.devuger.common.services.FeedService;
 import com.devuger.common.services.UserService;
@@ -13,6 +14,7 @@ import com.devuger.common.services.UserService;
 public class BaseController extends BaseService {
   
   @Autowired protected AttachmentService attachmentService;
+  @Autowired protected CommentService commentService;
   @Autowired protected DeviceService deviceService;
   @Autowired protected FeedService feedService;
   @Autowired protected UserService userService;

@@ -2,6 +2,7 @@ package com.devuger.common.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class AbstractEntity {
   @Column(nullable = false)
   private Date createdOn = new Date();
   @JsonIgnore
-  @ManyToOne
+  @ManyToOne(cascade=CascadeType.MERGE)
   @JoinColumn(name = "createdBy", nullable = false)
   private User createdBy;
 

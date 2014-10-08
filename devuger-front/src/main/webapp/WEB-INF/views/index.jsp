@@ -8,6 +8,7 @@
 	pageContext.setAttribute("crlf", "\n");
 </jsp:scriptlet>
 <div class="container">
+	<div class="feeds">
 	<c:forEach items="${feeds}" var="feed">
 		<div class="row">
 			<div class="col-xs-5">
@@ -41,55 +42,65 @@
 					</div>
 					<div class="panel-body">
 						<p>${fn:replace(feed.message, crlf, "<br/>")}</p>
+						<hr/>
+						<dl class="clear">
 						<c:forEach items="${feed.comments}" var="comment">
-							<p>${comment.content}</p>
+							<dd style="margin-bottom:4px;">
+								<span class="label label-default">${comment.createdBy.username}</span>
+								${comment.content}, <fmt:formatDate pattern="MM/dd/yyyy" value="${comment.createdOn}" />
+							</dd>
 						</c:forEach>
+						</dl>
 					</div>
+
 					<div class="panel-footer">
 						<div class="input-placeholder">Add a comment...</div>
 					</div>
+
 					<div class="panel-google-plus-comment">
-						<img class="img-circle"
-							src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46"
-							alt="User Image" />
-						<div class="panel-google-plus-textarea">
-							<textarea rows="4"></textarea>
-							<button type="submit" class="[ btn btn-success disabled ]">Post
-								comment</button>
+						<img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
+						<form:form modelAttribute="comment" action="${contextPath}/comments/add.json" method="post" class="panel-google-plus-textarea">
+							<form:hidden path="feed.id" value="${feed.id}"/>
+							<form:textarea path="content" rows="3"/>
+							<button type="submit" class="[ btn btn-success disabled ]">Post comment</button>
 							<button type="reset" class="[ btn btn-default ]">Cancel</button>
-						</div>
+						</form:form>
 						<div class="clearfix"></div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
 	</c:forEach>
+	</div>
 </div>
 <script>
-  $(function() {
-    $(
-        '.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]')
-        .on('click', function(event) {
-          var $panel = $(this).closest('.panel-google-plus');
-          $comment = $panel.find('.panel-google-plus-comment');
+$(function() {
+  $(".feeds").autolink();
 
-          $comment.find('.btn:first-child').addClass('disabled');
-          $comment.find('textarea').val('');
+  $(
+      '.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]')
+      .on('click', function(event) {
+        var $panel = $(this).closest('.panel-google-plus');
+        $comment = $panel.find('.panel-google-plus-comment');
 
-          $panel.toggleClass('panel-google-plus-show-comment');
+        $comment.find('.btn:first-child').addClass('disabled');
+        $comment.find('textarea').val('');
 
-          if ($panel.hasClass('panel-google-plus-show-comment')) {
-            $comment.find('textarea').focus();
-          }
-        });
-    $('.panel-google-plus-comment > .panel-google-plus-textarea > textarea')
-        .on('keyup', function(event) {
-          var $comment = $(this).closest('.panel-google-plus-comment');
+        $panel.toggleClass('panel-google-plus-show-comment');
 
-          $comment.find('button[type="submit"]').addClass('disabled');
-          if ($(this).val().length >= 1) {
-            $comment.find('button[type="submit"]').removeClass('disabled');
-          }
-        });
-  });
+        if ($panel.hasClass('panel-google-plus-show-comment')) {
+          $comment.find('textarea').focus();
+        }
+      });
+  $('.panel-google-plus-comment > .panel-google-plus-textarea > textarea')
+      .on('keyup', function(event) {
+        var $comment = $(this).closest('.panel-google-plus-comment');
+
+        $comment.find('button[type="submit"]').addClass('disabled');
+        if ($(this).val().length >= 1) {
+          $comment.find('button[type="submit"]').removeClass('disabled');
+        }
+      });
+});
 </script>

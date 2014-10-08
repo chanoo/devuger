@@ -19,6 +19,7 @@ import com.devuger.common.entities.Feed;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
 import com.devuger.common.support.base.BaseResult;
+import com.devuger.front.common.session.UserSession;
 
 /**
  * Handles requests for the application home page.
@@ -36,10 +37,12 @@ public class FeedController extends BaseController {
    * @return
    * @throws IOException
    */
+  @ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public BaseResult view(HttpServletRequest request, HttpServletResponse response, Model model, @UserAuth User user, @ModelAttribute Feed feed)
 	throws IOException {
 
+	  user = UserSession.isSignin(request);
 	  feed = feedService.add(feed, user);
 
 	  return new BaseResult("작성 되었습니다.");
