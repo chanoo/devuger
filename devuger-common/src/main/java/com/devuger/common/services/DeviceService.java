@@ -98,7 +98,7 @@ public class DeviceService extends BaseService {
       InputStream certStream = PushUtil.class.getClassLoader().getResourceAsStream("certificate.p12");
 
       final ApnsService apnsService = APNS.newService().withAppleDestination(true).withCert(certStream, CERT_PASSWORD).withDelegate(delegate).withSandboxDestination().build();
-      final String payload = APNS.newPayload().alertBody(message).build();
+      final String payload = APNS.newPayload().alertBody(message).sound("default").build();
       apnsService.start();
       final ApnsNotification goodMsg = apnsService.push(token, payload);
       this.getLogger().info("Message id: " + goodMsg.getIdentifier());
