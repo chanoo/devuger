@@ -27,7 +27,7 @@ import com.notnoop.apns.DeliveryError;
 public class DeviceService extends BaseService {
 
   private final static String CERT_PASSWORD = "bbuzzart2014";
-  private final static String API_KEY = "AIzaSyCC2phv_qCWIr5yzYS6nqupPs5ZrQoB48w";
+  private final static String API_KEY = "AIzaSyA1LmALf3wV2QKi0VRGWL0kZQ5M9qtgUy0";
 
   public Device add(Device device) {
 
@@ -98,7 +98,7 @@ public class DeviceService extends BaseService {
       InputStream certStream = PushUtil.class.getClassLoader().getResourceAsStream("certificate.p12");
 
       final ApnsService apnsService = APNS.newService().withAppleDestination(true).withCert(certStream, CERT_PASSWORD).withDelegate(delegate).withSandboxDestination().build();
-      final String payload = APNS.newPayload().alertBody(message).customField("alert", "good").sound("Printer.aiff").build();
+      final String payload = APNS.newPayload().alertBody(message).build();
       apnsService.start();
       final ApnsNotification goodMsg = apnsService.push(token, payload);
       this.getLogger().info("Message id: " + goodMsg.getIdentifier());
