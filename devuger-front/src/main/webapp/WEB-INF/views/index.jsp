@@ -41,6 +41,9 @@
 					</div>
 					<div class="panel-body">
 						<p>${fn:replace(feed.message, crlf, "<br/>")}</p>
+						<c:forEach items="${feed.comments}" var="comment">
+							<p>${comment.content}</p>
+						</c:forEach>
 					</div>
 					<div class="panel-footer">
 						<div class="input-placeholder">Add a comment...</div>

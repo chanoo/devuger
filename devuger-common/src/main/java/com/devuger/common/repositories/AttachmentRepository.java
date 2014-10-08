@@ -7,4 +7,6 @@ import com.devuger.common.entities.Attachment;
 
 @Repository
 public interface AttachmentRepository extends JpaRepository<Attachment, Long> {
+  
+  Attachment findByDigest(String digest);
 }

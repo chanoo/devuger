@@ -26,6 +26,7 @@ public class UserService extends BaseService {
     User user = userRepository.findByEmail(email);
     Assert.notNull(user, "이메일주소 또는 비밀번호가 틀렸습니다.");
     hashedPasswrd = passwordEncoder.encodePassword(hashedPasswrd, user.getId().toString());
+    this.getLogger().debug("hashedPasswrd : " + hashedPasswrd);
     Assert.isTrue(hashedPasswrd.equals(user.getHashedPassword()), "이메일주소 또는 비밀번호가 틀렸습니다.");
 
     // 접속 시간, 아이피 업데이트

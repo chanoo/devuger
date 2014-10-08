@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -28,9 +28,10 @@ public class Feed extends AbstractEntity implements Serializable {
   private String message; // 메시지
   @Column(nullable=false)
   private int likeCount = 0; // 좋아요수
-  @JsonIgnore
-  @OneToMany(mappedBy="feed")
+  @OneToMany(mappedBy="feed", fetch=FetchType.EAGER)
   private List<Comment> comments;
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
+  private List<FeedReport> feedReports;
   public String getTitle() {
     return title;
   }

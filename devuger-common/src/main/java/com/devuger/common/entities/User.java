@@ -2,11 +2,17 @@ package com.devuger.common.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -22,6 +28,8 @@ public class User extends AbstractEntity implements Serializable {
   private static final long serialVersionUID = 1827889442772094376L;
   @Column(nullable=false, length=100)
   private String username;
+  @Column(nullable=false, length=20)
+  private String hello;
   @Column(nullable=false, length=255)
   private String email;
   @Column(nullable=false, length=255)
@@ -38,7 +46,17 @@ public class User extends AbstractEntity implements Serializable {
   private boolean serviceTerms;
   @Transient
   private boolean userInfoTerms;
+  
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy="createdBy", fetch=FetchType.LAZY) 
+  private List<Device> devices;
 
+  public String getHello() {
+    return hello;
+  }
+  public void setHello(String hello) {
+    this.hello = hello;
+  }
   public String getEmail() {
     return email;
   }
@@ -92,5 +110,11 @@ public class User extends AbstractEntity implements Serializable {
   }
   public void setLastSigninIp(String lastSigninIp) {
     this.lastSigninIp = lastSigninIp;
+  }
+  public List<Device> getDevices() {
+    return devices;
+  }
+  public void setDevices(List<Device> devices) {
+    this.devices = devices;
   }
 }
