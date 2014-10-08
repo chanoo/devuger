@@ -2,6 +2,8 @@ devuger
 =======
 
 개발자 SNS 오픈소스 프로젝트 입니다.
+http://www.devuger.com
+
 
 # Tomcat JNDI 설정 
 
