@@ -8,6 +8,11 @@ devuger
 메일 : x64core@gmail.com<br/>
 <br/>
 
+# Framework
+
+- Spring Framework 4.1.1
+- Spring Data 1.6.4 + Hibernate 4.3.6
+- Maven
 
 # Tomcat JNDI 설정 
 
@@ -43,5 +48,4 @@ devuger
                     auth="Container"
                     type="javax.sql.DataSource" />
     </Context>
-
 
