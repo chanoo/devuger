@@ -31,41 +31,6 @@ function isSuccess(json)
 	return true;
 }
 
-function bindAjax() {
-	$('.ajax').unbind('click').bind('click', function (e) {
-		e.stopPropagation();
-		var href = $(this).attr('href');
-		$.ajax({
-			url : href,
-			type : "get",
-			success : function(json, textStatus) {
-				if(isSuccess(json))
-					notyAlert("success", json.message);
-			}
-		});
-		
-		return false;
-	});
-}
-
-function bindReloadAjax() {
-	$('.reload-ajax').unbind('click').bind('click', function (e) {
-		e.stopPropagation();
-		var href = $(this).attr('href');
-		$.ajax({
-			url : href,
-			type : "get",
-			success : function(json, textStatus) {
-				if(isSuccess(json)) {
-					document.location.reload();
-				}
-			}
-		});
-		
-		return false;
-	});
-}
-
 Number.prototype.format = function() {
     if(this==0) return 0;
     
@@ -76,6 +41,7 @@ Number.prototype.format = function() {
  
     return n;
 };
+
 String.prototype.startsWith = function (str) {
 	return this.indexOf(str) == 0;
 };

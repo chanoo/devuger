@@ -26,7 +26,7 @@ import com.notnoop.apns.DeliveryError;
 @Service
 public class DeviceService extends BaseService {
 
-  private final static String CERT_PASSWORD = "INPUT YOUR .P12 PASSWORD";
+  private final static String CERT_PASSWORD = "bbuzzart2014";
   private final static String API_KEY = "INPUT YOUR ANDROID KEY";
 
   public Device add(Device device) {

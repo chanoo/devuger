@@ -14,6 +14,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -46,15 +47,19 @@ public class User extends AbstractEntity implements Serializable {
   private boolean serviceTerms;
   @Transient
   private boolean userInfoTerms;
-  
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy="createdBy", fetch=FetchType.LAZY) 
   private List<Device> devices;
-
+  @JsonIgnore
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy="createdBy", fetch=FetchType.LAZY)
   private List<Comment> comments;
 
+  @Override
+  public String toString() {
+    return "User [username=" + username + ", hello=" + hello + ", email=" + email + ", hashedPassword=" + hashedPassword + ", token=" + token + ", lastSigninDate=" + lastSigninDate + ", lastSigninIp=" + lastSigninIp + ", hashedPasswordConfirm=" + hashedPasswordConfirm + ", serviceTerms="
+        + serviceTerms + ", userInfoTerms=" + userInfoTerms + ", devices=" + devices + ", comments=" + comments + "]";
+  }
   public String getHello() {
     return hello;
   }

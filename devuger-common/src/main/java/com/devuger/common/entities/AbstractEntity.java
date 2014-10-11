@@ -12,10 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import com.devuger.common.support.json.DateSerializer;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @MappedSuperclass
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class AbstractEntity {
 
   @Id
@@ -24,7 +26,6 @@ public class AbstractEntity {
   @JsonSerialize(using = DateSerializer.class)
   @Column(nullable = false)
   private Date createdOn = new Date();
-  @JsonIgnore
   @ManyToOne(cascade=CascadeType.MERGE)
   @JoinColumn(name = "createdBy", nullable = false)
   private User createdBy;

@@ -47,4 +47,16 @@ public class UserService extends BaseService {
     
     return userRepository.save(user);
   }
+
+  /**
+   * 회원정보 가져오기
+   * 
+   * @param id 회원 PK
+   * @return
+   */
+  public User get(Long id) {
+    // TODO Auto-generated method stub
+    Assert.notNull(id, "사용자를 선택 해주세요.");
+    return userRepository.findOne(id);
+  }
 }

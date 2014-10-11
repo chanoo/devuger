@@ -10,7 +10,8 @@ public class GlobalConst {
 	public static String RESULT_ERROR = "error";
 	public static String REDIRECT_URL = "redirect.url";
 
-	public final static String USER_SESSION = "userSession";
+  public final static String USER_SESSION = "userSession";
+  public final static String USER_PK_SESSION = "userPkSession";
 	public final static String CART_SESSION = "cartSession";
 
 	public final static String CART  = "cartSession";

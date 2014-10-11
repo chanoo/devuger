@@ -48,6 +48,7 @@
 							<dd style="margin-bottom:4px;">
 								<span class="label label-default">${comment.createdBy.username}</span>
 								${comment.content}, <fmt:formatDate pattern="MM/dd/yyyy" value="${comment.createdOn}" />
+								<a href="${contextPath}/comments/${comment.id}/remove.json" class="remove">×</a>
 							</dd>
 						</c:forEach>
 						</dl>
@@ -74,8 +75,33 @@
 	</c:forEach>
 	</div>
 </div>
-<script>
+<script type="text/javascript">
+$(document).ready(function(){
+  
+  $(".remove").click(function (e) {
+  	e.preventDefault();
+    if(confirm("삭제하시겠습니까?")) {
+
+  		var href = $(this).attr('href');
+  		$.ajax({
+  			url : href,
+  			type : "get",
+  			success : function(json, textStatus) {
+  				if(isSuccess(json)) {
+  					document.location.reload();
+  				}
+  			}
+  		});
+
+    }
+  	
+  	return false;
+  });
+  
+});
+
 $(function() {
+
   $(".feeds").autolink();
 
   $(

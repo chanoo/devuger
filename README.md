@@ -4,7 +4,8 @@ devuger
 개발자 SNS 오픈소스 프로젝트 입니다.<br/>
 최종 목표는 아이폰, 안드로이드 앱 개발까지입니다.<br/>
 <br/>
-http://www.devuger.com<br/>
+홈페이지 : http://www.devuger.com<br/>
+메일 : x64core@gmail.com<br/>
 <br/>
 
 
@@ -42,6 +43,5 @@ http://www.devuger.com<br/>
                     auth="Container"
                     type="javax.sql.DataSource" />
     </Context>
-
 
 
