@@ -17,6 +17,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+/**
+ * 페이스북 연동 테이블
+ * 
+ * @author hello
+ *
+ */
 @JsonAutoDetect
 @Entity
 @Table(name="user_connections")

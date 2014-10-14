@@ -18,6 +18,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * 사용자 테이블
+ * 
+ * @author hello
+ *
+ */
 @Entity
 @Table(name="users")
 @JsonInclude(Include.NON_NULL)

@@ -14,6 +14,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * 첨부 파일 테이블
+ * 
+ * @author hello
+ *
+ */
 @Entity
 @Table(name="attachments")
 @JsonInclude(Include.NON_EMPTY)

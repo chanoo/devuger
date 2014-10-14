@@ -16,6 +16,13 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+/**
+ * 테이블 마다 공통 컬럼
+ *  - id(PK), 생성일, 생성자
+ * 
+ * @author hello
+ *
+ */
 @MappedSuperclass
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class AbstractEntity {
@@ -26,7 +33,7 @@ public class AbstractEntity {
   @JsonSerialize(using = DateSerializer.class)
   @Column(nullable = false)
   private Date createdOn = new Date();
-  @ManyToOne(cascade=CascadeType.MERGE)
+  @ManyToOne(cascade=CascadeType.PERSIST)
   @JoinColumn(name = "createdBy", nullable = false)
   private User createdBy;
 

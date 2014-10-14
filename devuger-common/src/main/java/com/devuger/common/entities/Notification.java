@@ -15,6 +15,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+/**
+ * 알림 테이블
+ * 
+ * @author hello
+ *
+ */
 @Entity
 @Table(name="notifications")
 @JsonInclude(Include.NON_NULL)

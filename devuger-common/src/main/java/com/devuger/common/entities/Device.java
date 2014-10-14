@@ -13,6 +13,12 @@ import com.devuger.common.support.code.DeviceOs;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * 아이폰, 안드로이드 푸시 서비스를 하기위한 테이블
+ * 
+ * @author hello
+ *
+ */
 @Entity
 @Table(name="devices")
 @JsonInclude(Include.NON_EMPTY)

@@ -11,6 +11,12 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * 팔로우, 팔로윙 테이블
+ * 
+ * @author hello
+ *
+ */
 @Entity
 @Table(name="follow")
 @JsonInclude(Include.NON_NULL)

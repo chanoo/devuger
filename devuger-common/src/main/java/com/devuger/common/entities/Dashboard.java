@@ -15,6 +15,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+/**
+ * 대시보드 테이블
+ *  - 사용자별로 현황 정보 제공
+ *  cf) 알림수, 팔로워수, 팔로윙수
+ * 
+ * @author hello
+ *
+ */
 @Entity
 @Table(name="dashboards")
 @JsonInclude(Include.NON_NULL)

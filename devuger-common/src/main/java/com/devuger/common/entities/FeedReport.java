@@ -11,6 +11,12 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * 피드 신고 테이블
+ * 
+ * @author hello
+ *
+ */
 @Entity
 @Table(name="feed_reports")
 @JsonInclude(Include.NON_NULL)

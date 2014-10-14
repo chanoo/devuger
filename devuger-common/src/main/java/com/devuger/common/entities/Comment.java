@@ -14,6 +14,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * 코멘트 테이블
+ * 
+ * @author hello
+ *
+ */
 @JsonAutoDetect
 @Entity
 @Table(name="comments")
