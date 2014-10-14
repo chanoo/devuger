@@ -1,5 +1,7 @@
 package com.devuger.common.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -62,6 +64,11 @@ public class CommentService extends BaseService {
     Assert.isTrue(user.equals(comment.getCreatedBy()), "코멘트 삭제 권한이 없습니다.");
 
     commentRepository.delete(id);
+  }
+
+  public List<Comment> getAll() {
+    // TODO Auto-generated method stub
+    return commentRepository.findAll();
   }
 
 }

@@ -1,12 +1,15 @@
 package com.devuger.front.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,36 @@ import com.devuger.front.common.session.UserSession;
 @RequestMapping("/comments")
 public class CommentController extends BaseController {
 
+  @ResponseBody
+  @RequestMapping(method = RequestMethod.GET)
+  public BaseResult index(HttpServletRequest request, HttpServletResponse response, Model model)
+  throws IOException, ServletRequestBindingException {
+
+    List<Comment> comments = commentService.getAll();
+
+    BaseResult baseResult = new BaseResult("추가되었습니다.");
+    baseResult.addAttribute(comments);
+    return baseResult;
+  }
+
+  
+  @ResponseBody
+  @RequestMapping(value = "/test", method = RequestMethod.POST)
+  public BaseResult add(HttpServletRequest request, HttpServletResponse response, Model model)
+  throws IOException, ServletRequestBindingException {
+
+    String name = ServletRequestUtils.getStringParameter(request, "name");
+    String[] mcList = ServletRequestUtils.getStringParameters(request, name);
+    this.getLogger().debug("여기 오나요??");
+
+    for(String mc : mcList) {
+      this.getLogger().debug("mc" + mc);
+    }
+
+    BaseResult baseResult = new BaseResult("추가되었습니다.");
+    return baseResult;
+  }
+  
   /**
    * 코멘트 추가 수행
    * 

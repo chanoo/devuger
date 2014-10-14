@@ -40,7 +40,7 @@ import com.devuger.common.support.base.BaseResult;
  */
 @Controller
 public class HomeController extends BaseController {
-	
+
   /**
    * 
    * 
