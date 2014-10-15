@@ -19,7 +19,7 @@ $.ajaxSetup({
 function isSuccess(json)
 {
 	if(json.result != "success") {
-		notyAlert("error", json.message);
+		alert(json.message);
 	}
 	if(json.redirect != null && json.redirect.length > 0) {
 		document.location.href = json.redirect;

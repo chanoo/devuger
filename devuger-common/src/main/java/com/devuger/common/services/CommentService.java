@@ -11,6 +11,10 @@ import com.devuger.common.support.base.BaseService;
 
 /**
  * 코멘트 관련 서비스
+ *  - 코멘트 1개 가져오기
+ *  - 코멘트 추가
+ *  - 코멘트 삭제
+ *  - 모든 코멘트 가져오기
  * 
  * @author hello
  *
@@ -19,9 +23,9 @@ import com.devuger.common.support.base.BaseService;
 public class CommentService extends BaseService {
 
   /**
-   * 코멘트 가져오기
+   * 코멘트 1개 가져오기
    * 
-   * @param id
+   * @param id PK
    * @return
    */
   public Comment get(Long id)
@@ -66,6 +70,11 @@ public class CommentService extends BaseService {
     commentRepository.delete(id);
   }
 
+  /**
+   * 모든 코멘트 가져오기
+   * 
+   * @return
+   */
   public List<Comment> getAll() {
     // TODO Auto-generated method stub
     return commentRepository.findAll();

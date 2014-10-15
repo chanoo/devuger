@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -34,8 +35,12 @@ public class Feed extends AbstractEntity implements Serializable {
   private String message; // 메시지
   @Column(nullable=false)
   private int likeCount = 0; // 좋아요수
+  @JsonIgnoreProperties({ "feed" })
   @OneToMany(mappedBy="feed", fetch=FetchType.EAGER)
   private List<Comment> comments;
+  @JsonIgnoreProperties({ "feed" })
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
+  private List<Like> likes;
   @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
   private List<FeedReport> feedReports;
   public String getTitle() {
@@ -61,5 +66,17 @@ public class Feed extends AbstractEntity implements Serializable {
   }
   public void setComments(List<Comment> comments) {
     this.comments = comments;
+  }
+  public List<Like> getLikes() {
+    return likes;
+  }
+  public void setLikes(List<Like> likes) {
+    this.likes = likes;
+  }
+  public List<FeedReport> getFeedReports() {
+    return feedReports;
+  }
+  public void setFeedReports(List<FeedReport> feedReports) {
+    this.feedReports = feedReports;
   }
 }

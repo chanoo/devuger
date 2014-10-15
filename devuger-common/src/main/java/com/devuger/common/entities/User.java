@@ -35,24 +35,28 @@ public class User extends AbstractEntity implements Serializable {
   private static final long serialVersionUID = 1827889442772094376L;
   @Column(nullable=false, length=100)
   private String username;
-  @Column(nullable=false, length=20)
-  private String hello;
   @Column(nullable=false, length=255)
   private String email;
+  @JsonIgnore
   @Column(nullable=false, length=255)
   private String hashedPassword;
   @Column(nullable=false, length=255)
   private String token;
+  @JsonIgnore
   @Column(nullable=false)
   private Date lastSigninDate;
+  @JsonIgnore
   @Column(nullable=false, length=20)
   private String lastSigninIp;
   @Transient
   private String hashedPasswordConfirm;
+  @JsonIgnore
   @Transient
   private boolean serviceTerms;
+  @JsonIgnore
   @Transient
   private boolean userInfoTerms;
+  @JsonIgnore
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy="createdBy", fetch=FetchType.LAZY) 
   private List<Device> devices;
@@ -60,18 +64,6 @@ public class User extends AbstractEntity implements Serializable {
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy="createdBy", fetch=FetchType.LAZY)
   private List<Comment> comments;
-
-  @Override
-  public String toString() {
-    return "User [username=" + username + ", hello=" + hello + ", email=" + email + ", hashedPassword=" + hashedPassword + ", token=" + token + ", lastSigninDate=" + lastSigninDate + ", lastSigninIp=" + lastSigninIp + ", hashedPasswordConfirm=" + hashedPasswordConfirm + ", serviceTerms="
-        + serviceTerms + ", userInfoTerms=" + userInfoTerms + ", devices=" + devices + ", comments=" + comments + "]";
-  }
-  public String getHello() {
-    return hello;
-  }
-  public void setHello(String hello) {
-    this.hello = hello;
-  }
   public String getEmail() {
     return email;
   }

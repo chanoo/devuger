@@ -37,7 +37,7 @@ public class CommentController extends BaseController {
     List<Comment> comments = commentService.getAll();
 
     BaseResult baseResult = new BaseResult("추가되었습니다.");
-    baseResult.addAttribute(comments);
+    baseResult.addAttribute("comments", comments);
     return baseResult;
   }
 

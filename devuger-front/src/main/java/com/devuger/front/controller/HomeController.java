@@ -18,6 +18,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -53,9 +54,7 @@ public class HomeController extends BaseController {
 	  
 	  int page = ServletRequestUtils.getIntParameter(request, "page", 1);
 
-	  User user = new User();
-	  user.setId(1L);
-    List<Feed> feeds = feedService.getByUser(user, page);
+    Page<Feed> feeds = feedService.getAll(page);
     model.addAttribute("feeds", feeds);
     
 		return "index";

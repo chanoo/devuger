@@ -6,6 +6,7 @@ import com.devuger.common.repositories.AttachmentRepository;
 import com.devuger.common.repositories.CommentRepository;
 import com.devuger.common.repositories.DeviceRepository;
 import com.devuger.common.repositories.FeedRepository;
+import com.devuger.common.repositories.LikeRepository;
 import com.devuger.common.repositories.UserRepository;
 
 public class BaseService extends BaseObject {
@@ -14,6 +15,7 @@ public class BaseService extends BaseObject {
   @Autowired protected DeviceRepository deviceRepository;
   @Autowired protected CommentRepository commentRepository;
   @Autowired protected FeedRepository feedRepository;
+  @Autowired protected LikeRepository likeRepository;
   @Autowired protected UserRepository userRepository;
 
 }
