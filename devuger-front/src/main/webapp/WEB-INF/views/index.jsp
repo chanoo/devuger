@@ -97,7 +97,7 @@
 										alt="Mouse0270" />
 									<h3>${feed.createdBy.username}</h3>
 									<h5>
-										<span><fmt:formatDate pattern="M월 d일, yyyy" value="${feed.createdOn}" /></span>
+										<span class="timeago" title="${feed.createdOn}">${feed.createdOn}</span>
 									</h5>
 								</div>
 								<div class="panel-body">
@@ -231,6 +231,7 @@ $(document).ready(function(){
 $(function() {
 
   $(".feeds").autolink();
+  $(".timeago").timeago();
   $('.float').affix();
 
   $('div[data-spy="affix"]').each(function() {
