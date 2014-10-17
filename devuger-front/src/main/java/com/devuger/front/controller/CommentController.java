@@ -1,11 +1,11 @@
 package com.devuger.front.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -34,7 +34,10 @@ public class CommentController extends BaseController {
   public BaseResult index(HttpServletRequest request, HttpServletResponse response, Model model)
   throws IOException, ServletRequestBindingException {
 
-    List<Comment> comments = commentService.getAll();
+    int page = ServletRequestUtils.getIntParameter(request, "page", 1);
+    
+    User createdBy = UserSession.isSignin(request);
+    Page<Comment> comments = commentService.getByUser(createdBy, page);
 
     BaseResult baseResult = new BaseResult("추가되었습니다.");
     baseResult.addAttribute("comments", comments);

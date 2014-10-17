@@ -2,12 +2,19 @@ package com.devuger.common.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import com.devuger.common.entities.Comment;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseService;
+import com.devuger.common.support.constant.GlobalConst;
 
 /**
  * 코멘트 관련 서비스
@@ -78,6 +85,22 @@ public class CommentService extends BaseService {
   public List<Comment> getAll() {
     // TODO Auto-generated method stub
     return commentRepository.findAll();
+  }
+  
+  /**
+   * 사용자별 코멘트 정보 가져오기
+   * 
+   * @param createdBy
+   * @param page
+   * @return
+   */
+  public Page<Comment> getByUser(User createdBy, int page) {
+    
+    Order order = new Order(Direction.DESC, "id");
+    Sort sort = new Sort(order);
+    Pageable pageable = new PageRequest(page - 1, GlobalConst.PAGE_SIZE, sort);
+    
+    return commentRepository.findByCreatedBy(createdBy, pageable);
   }
 
 }

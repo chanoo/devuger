@@ -32,11 +32,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.devuger.common.entities.Attachment;
 import com.devuger.common.entities.Comment;
 import com.devuger.common.entities.Feed;
-import com.devuger.common.entities.Like;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
 import com.devuger.common.support.base.BaseResult;
-import com.devuger.front.common.session.UserSession;
 
 /**
  * Handles requests for the application home page.
@@ -54,35 +52,9 @@ public class HomeController extends BaseController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, Model model, @ModelAttribute Comment comment) {
 	  
-	  User user = UserSession.get(request);
-	  
 	  int page = ServletRequestUtils.getIntParameter(request, "page", 1);
 
     Page<Feed> feeds = feedService.getAll(page);
-    
-    // 내가 좋아요 했는지 확인
-    if(user != null) {
-
-      List<Like> likes = likeService.getByCreatedByAndFeed(user, feeds.getContent());
-      if (!likes.isEmpty()) {
-        for (Feed feed : feeds.getContent()) {
-          for (Like like : likes) {
-
-            if (like.getFeed().equals(feed)) {
-              feed.setLiked(true);
-              likes.remove(like);
-              break;
-            }
-
-          }
-          
-          if (likes.isEmpty())
-            break;
-        }
-      }
-      
-    }
-    
     model.addAttribute("feeds", feeds);
     
 		return "index";
