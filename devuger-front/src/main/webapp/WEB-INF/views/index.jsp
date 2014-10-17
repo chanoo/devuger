@@ -9,31 +9,33 @@
 </jsp:scriptlet>
 <div class="container">
 	<div class="row">
-			<div class="col-xs-2 text-right float">
+			<div class="col-xs-2">
+				<div class="text-right float" data-spy="affix" data-offset-top="60">
 
-				<dl>
-					<dt>그룹</dt>
-					<dd><a href="#">아이폰</a></dd>
-					<dd><a href="#">안드로이드</a></dd>
-					<dd><a href="#">자바</a></dd>
-					<dd><a href="#">구인구직</a></dd>
-				</dl>
-
-				<dl>
-					<dt>관계</dt>
-					<dd><a href="#">팔로우</a></dd>
-					<dd><a href="#">팔로윙</a></dd>
-					<dd><a href="#">친구</a></dd>
-				</dl>
-
-				<dl>
-					<dt>필터</dt>
-					<dd><a href="#">피드</a></dd>
-					<dd><a href="#">코멘트</a></dd>
-					<dd><a href="#">좋아요</a></dd>
-					<dd><a href="#">그룹</a></dd>
-				</dl>
-
+					<dl>
+						<dt>그룹</dt>
+						<dd><a href="#">아이폰</a></dd>
+						<dd><a href="#">안드로이드</a></dd>
+						<dd><a href="#">자바</a></dd>
+						<dd><a href="#">구인구직</a></dd>
+					</dl>
+	
+					<dl>
+						<dt>관계</dt>
+						<dd><a href="#">팔로우</a></dd>
+						<dd><a href="#">팔로윙</a></dd>
+						<dd><a href="#">친구</a></dd>
+					</dl>
+	
+					<dl>
+						<dt>필터</dt>
+						<dd><a href="#">피드</a></dd>
+						<dd><a href="#">코멘트</a></dd>
+						<dd><a href="#">좋아요</a></dd>
+						<dd><a href="#">그룹</a></dd>
+					</dl>
+				
+				</div>
 			</div>
 	
 			<div class="col-xs-6">
@@ -101,11 +103,11 @@
 								<div class="panel-body">
 									<p>${fn:replace(feed.message, crlf, "<br/>")}</p>
 									<p>
-										<c:if test="${feed.likeCount ne 0}">
+										<c:if test="${fn:length(feed.likes) ne 0}">
 											<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
-											${feed.likeCount}명이 좋아해요.
+											${fn:length(feed.likes)}명이 좋아해요.
 										</c:if>
-										<c:if test="${feed.likeCount eq 0}">
+										<c:if test="${fn:length(feed.likes) eq 0}">
 											제일 처음
 											<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
 										</c:if>
@@ -144,40 +146,42 @@
 				</div>
 				<!-- 피드 리스트 끝 -->
 			</div>
-			<div class="col-xs-4 float">
+			<div class="col-xs-4">
+				<div class="float" data-spy="affix" data-offset-top="60">			
 			
-				<div class="panel panel-default">
-				  <div class="panel-body">
-				  <span>
-헬로 헬로 헬로우~~~!<br/>
-<br/>
-2014년 9월 말, 지금 나는 위한 개발이 아닌 남을 위한 서비스 개발에 몰두 하고 있다.<br/>
-내 자신에게 필요한 서비스를 만들어 본적이 없다.<br/>
-그래서 시작 했습니다!<br/>
-<br/>
-개발자들의 놀이터가 될수 있는 SNS을 만들어 보겠습니다!<br/>
-기필코 다 만들어버리겠다!!!<br/>
-<br/>
-github를 통해 사이트 전체 소스코드를 받을 수 있습니다.<br/>
-<br/>
-</span>
-<hr/>
-						<div class="well">
+					<div class="panel panel-default">
+					  <div class="panel-body">
+						  <span>
+								헬로 헬로 헬로우~~~!<br/>
+								<br/>
+								2014년 9월 말, 지금 나는 위한 개발이 아닌 남을 위한 서비스 개발에 몰두 하고 있다.<br/>
+								내 자신에게 필요한 서비스를 만들어 본적이 없다.<br/>
+								그래서 시작 했습니다!<br/>
+								<br/>
+								개발자들의 놀이터가 될수 있는 SNS을 만들어 보겠습니다!<br/>
+								기필코 다 만들어버리겠다!!!<br/>
+								<br/>
+								github를 통해 사이트 전체 소스코드를 받을 수 있습니다.<br/>
+								<br/>
+							</span>
+							<hr/>
+							<div class="well">
+	
+						  	<h3>To do</h3>
+						  	<ol>
+						  		<li>회원 가입/로그인/수정/탈퇴</li>
+						  		<li>페이스북 로그인/공유</li>
+						  		<li>피드 등록/삭제</li>
+						  		<li>좋아요 추가/취소</li>
+						  		<li>팔로워/팔로윙 추가/삭제</li>
+						  	</ol>
+	
+							</div>
+	
+					  </div>
+					</div>
 
-					  	<h3>To do</h3>
-					  	<ol>
-					  		<li>회원 가입/로그인/수정/탈퇴</li>
-					  		<li>페이스북 로그인/공유</li>
-					  		<li>피드 등록/삭제</li>
-					  		<li>좋아요 추가/취소</li>
-					  		<li>팔로워/팔로윙 추가/삭제</li>
-					  	</ol>
-
-						</div>
-
-				  </div>
 				</div>
-
 			</div>
 	</div>
 </div>
@@ -224,14 +228,15 @@ $(document).ready(function(){
   
 });
 
-$(window).scroll(function() {
-  $('.float').css('top', $(this).scrollTop() + "px");
-});
-
 $(function() {
 
   $(".feeds").autolink();
+  $('.float').affix();
 
+  $('div[data-spy="affix"]').each(function() {
+    $(this).width($(this).parent().width());
+  });
+  
   $(
       '.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]')
       .on('click', function(event) {
