@@ -1,5 +1,6 @@
 package com.devuger.common.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -24,15 +25,19 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  */
 @MappedSuperclass
 //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-public class AbstractEntity {
+public class AbstractEntity implements Serializable {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = -8172453925910184177L;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   @JsonSerialize(using = DateSerializer.class)
   @Column(nullable = false)
   private Date createdOn = new Date();
-  @JsonIgnoreProperties({ "createdBy" })
+  @JsonIgnoreProperties
   @ManyToOne(cascade=CascadeType.PERSIST)
   @JoinColumn(name = "createdBy", nullable = false)
   private User createdBy;

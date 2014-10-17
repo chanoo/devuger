@@ -15,6 +15,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Entity
 @Table(name="users")
 @JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties({"createdBy"})
 public class User extends AbstractEntity implements Serializable {
 
   /**
@@ -57,8 +59,7 @@ public class User extends AbstractEntity implements Serializable {
   @Transient
   private boolean userInfoTerms;
   @JsonIgnore
-  @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="createdBy", fetch=FetchType.LAZY) 
+  @OneToMany(mappedBy="createdBy", fetch=FetchType.EAGER) 
   private List<Device> devices;
   @JsonIgnore
   @LazyCollection(LazyCollectionOption.FALSE)

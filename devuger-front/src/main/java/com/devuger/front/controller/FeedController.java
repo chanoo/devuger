@@ -1,12 +1,12 @@
 package com.devuger.front.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -77,11 +77,11 @@ public class FeedController extends BaseController {
   }
 	
   /**
-   * 
+   * 좋아요
    * 
    * @param request
    * @param response
-   * @param id
+   * @param id 피드 PK
    * @return
    * @throws IOException
    */
@@ -92,13 +92,32 @@ public class FeedController extends BaseController {
 
     User user = UserSession.isSignin(request);
     Feed feed = feedService.get(id);
-    likeService.add(feed, user);
-    List<Like> likes = likeService.getByFeed(feed);
-    feed = feedService.setLikeCount(feed, likes.size());
+    Like like = likeService.add(feed, user);
 
-    BaseResult baseResult = new BaseResult("좋아요 했습니다.");
-    baseResult.addAttribute("feed", feed);
+    BaseResult baseResult = new BaseResult("좋아요 했습니다!");
+    baseResult.addAttribute("like", like);
     return baseResult;
+  }
+  
+  /**
+   * 좋아요 취소
+   * 
+   * @param request
+   * @param response
+   * @param id 피드 PK
+   * @return
+   * @throws IOException
+   */
+  @ResponseBody
+  @RequestMapping(value = "/{id}/unlike", method = RequestMethod.GET)
+  public BaseResult unlike(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id)
+  throws IOException {
+
+    User user = UserSession.isSignin(request);
+    Feed feed = feedService.get(id);
+    likeService.remove(feed, user);
+
+    return new BaseResult("좋아요 취소했습니다!");
   }
 
 	/**
@@ -109,7 +128,7 @@ public class FeedController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-  @RequestMapping(method = RequestMethod.GET)
+  @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
   public BaseResult index(HttpServletRequest request, Model model) {
 
     int page = ServletRequestUtils.getIntParameter(request, "page", 1);

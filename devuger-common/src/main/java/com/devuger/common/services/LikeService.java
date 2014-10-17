@@ -32,10 +32,27 @@ public class LikeService extends BaseService {
     like = new Like();
     like.setFeed(feed);
     like.setCreatedBy(createdBy);
-    
-    return likeRepository.save(like);
+
+    return likeRepository.saveAndFlush(like);
   }
   
+  /**
+   * 좋아요 취소
+   * 
+   * @param feed 피드
+   * @param createdBy 생성자
+   */
+  public void remove(Feed feed, User createdBy)
+  {
+    Assert.notNull(feed, "피드를 선택해주세요..");
+    Assert.notNull(createdBy, "로그인 해주세요.");
+
+    // 이미 추가된 LIKE인지 확인
+    Like like = likeRepository.findByFeedAndCreatedBy(feed, createdBy);
+    Assert.notNull(like, "벌써 좋아요 취소햇어요!");
+    likeRepository.delete(like);
+  }
+
   /**
    * 피드에 해당하는 좋아요 리스트 가져오기
    * 
@@ -45,5 +62,9 @@ public class LikeService extends BaseService {
   public List<Like> getByFeed(Feed feed) {
     Assert.notNull(feed, "피드를 선택해주세요.");
     return likeRepository.findByFeed(feed);
+  }
+  
+  public List<Like> getByCreatedByAndFeed(User createdBy, List<Feed> feeds) {
+    return likeRepository.findByCreatedByAndFeedIn(createdBy, feeds);
   }
 }

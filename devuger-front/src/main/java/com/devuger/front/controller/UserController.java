@@ -3,6 +3,7 @@ package com.devuger.front.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -87,7 +88,7 @@ public class UserController extends BaseController {
    * @return
    */
   @ResponseBody
-	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	@RequestMapping(value = "/signin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
   public BaseResult signin(HttpServletRequest request, HttpServletResponse response, Model model, @ModelAttribute User user)
   {
     String email = user.getEmail();

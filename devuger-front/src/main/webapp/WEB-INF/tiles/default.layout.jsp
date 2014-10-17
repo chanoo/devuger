@@ -10,7 +10,6 @@
 <html lang="ko">
 <head>
 	<tiles:insertAttribute name="layout.head" />
-	<link rel="stylesheet" href="${contextPath}/resources/js/ResponsiveSlides/responsiveslides.css" />
 	<link rel="stylesheet" href="<c:url value="/resources/style/custom.css" />">
 </head>
 <body>
@@ -59,6 +58,9 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 
 </div>
 </compress:html>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.autolink.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/timeago/jquery.timeago.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/timeago/locales/jquery.timeago.ko.js"/>"></script>
 <script src="//getbootstrap.com/dist/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/common.js"></script>
 <script type="text/javascript"> 

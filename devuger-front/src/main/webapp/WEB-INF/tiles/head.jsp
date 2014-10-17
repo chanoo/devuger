@@ -24,7 +24,6 @@
 <link rel="stylesheet" href="http://bootswatch.com/assets/css/bootswatch.min.css">
 <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css" />" />
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.11.1.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.autolink.js"/>"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

@@ -15,4 +15,6 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
   Like findByFeedAndCreatedBy(Feed feed, User createdBy);
 
   List<Like> findByFeed(Feed feed);
+
+  List<Like> findByCreatedByAndFeedIn(User createdBy, List<Feed> feeds);
 }

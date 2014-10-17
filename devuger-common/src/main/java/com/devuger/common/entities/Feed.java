@@ -3,11 +3,17 @@ package com.devuger.common.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.web.util.HtmlUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -33,16 +39,18 @@ public class Feed extends AbstractEntity implements Serializable {
   private String title; // 제목
   @Column(nullable=true, columnDefinition="TEXT")
   private String message; // 메시지
-  @Column(nullable=false)
-  private int likeCount = 0; // 좋아요수
   @JsonIgnoreProperties({ "feed" })
   @OneToMany(mappedBy="feed", fetch=FetchType.EAGER)
   private List<Comment> comments;
   @JsonIgnoreProperties({ "feed" })
-  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
   private List<Like> likes;
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
   private List<FeedReport> feedReports;
+  @Transient
+  private boolean liked = false;
   public String getTitle() {
     return title;
   }
@@ -53,13 +61,7 @@ public class Feed extends AbstractEntity implements Serializable {
     return message;
   }
   public void setMessage(String message) {
-    this.message = message;
-  }
-  public int getLikeCount() {
-    return likeCount;
-  }
-  public void setLikeCount(int likeCount) {
-    this.likeCount = likeCount;
+    this.message = HtmlUtils.htmlEscape(message);
   }
   public List<Comment> getComments() {
     return comments;
@@ -78,5 +80,11 @@ public class Feed extends AbstractEntity implements Serializable {
   }
   public void setFeedReports(List<FeedReport> feedReports) {
     this.feedReports = feedReports;
+  }
+  public boolean isLiked() {
+    return liked;
+  }
+  public void setLiked(boolean liked) {
+    this.liked = liked;
   }
 }

@@ -85,7 +85,7 @@
 								</div>
 								<div class="panel-google-plus-tags">
 									<ul>
-										<li>#Millennials</li>
+										<li>안드로이드 개발</li>
 										<li>#Generation</li>
 									</ul>
 								</div>
@@ -95,17 +95,22 @@
 										alt="Mouse0270" />
 									<h3>${feed.createdBy.username}</h3>
 									<h5>
-										<span><fmt:formatDate pattern="M월 d일, yyyy" value="${feed.createdOn}" /></span>
+										<span class="timeago" title="${feed.createdOn}">${feed.createdOn}</span>
 									</h5>
 								</div>
 								<div class="panel-body">
 									<p>${fn:replace(feed.message, crlf, "<br/>")}</p>
 									<p>
-										<c:if test="${feed.likeCount ne 0}">
-											<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
-											${feed.likeCount}명이 좋아해요.
+										<c:if test="${fn:length(feed.likes) ne 0}">
+												<c:if test="${feed.liked eq false}">
+													<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
+												</c:if>
+												<c:if test="${feed.liked eq true}">
+													<a href="${contextPath}/feeds/${feed.id}/unlike.json">좋아요 취소</a>
+												</c:if>												
+											${fn:length(feed.likes)}명이 좋아해요.
 										</c:if>
-										<c:if test="${feed.likeCount eq 0}">
+										<c:if test="${fn:length(feed.likes) eq 0}">
 											제일 처음
 											<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
 										</c:if>
@@ -115,7 +120,8 @@
 									<c:forEach items="${feed.comments}" var="comment">
 										<dd style="margin-bottom:4px;">
 											<span class="label label-default">${comment.createdBy.username}</span>
-											${comment.content}, <fmt:formatDate pattern="MM/dd/yyyy" value="${comment.createdOn}" />
+											${comment.content} 
+											<small class="timeago" title="${comment.createdOn}"></small><br/>
 											<a href="${contextPath}/comments/${comment.id}/remove.json" class="remove">×</a>
 										</dd>
 									</c:forEach>
@@ -202,6 +208,8 @@ $("#feed-form").submit(function() {
 
 $(document).ready(function(){
   
+  $(".timeago").timeago();
+
   $(".remove").click(function (e) {
   	e.preventDefault();
     if(confirm("삭제하시겠습니까?")) {

@@ -82,6 +82,7 @@ public class LoggingHandlerInterceptor extends HandlerInterceptorAdapter {
     DefaultTransactionDefinition def = new DefaultTransactionDefinition();
     def.setName("sessionTransaction");
     def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+    def.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
     TransactionStatus status = transactionManager.getTransaction(def);
     getThreadLocal().set(status);
 

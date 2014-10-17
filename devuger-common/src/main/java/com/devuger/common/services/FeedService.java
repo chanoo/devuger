@@ -76,7 +76,6 @@ public class FeedService extends BaseService {
     Order order = new Order(Direction.DESC, "id");
     Sort sort = new Sort(order);
     Pageable pageable = new PageRequest(page - 1, GlobalConst.PAGE_SIZE, sort);
-    
     return feedRepository.findAll(pageable);
   }
 
@@ -95,21 +94,5 @@ public class FeedService extends BaseService {
     Assert.isTrue(feed.getCreatedBy().equals(user), "삭제할 권한이 없습니다.");
     
     feedRepository.delete(id);
-  }
-
-  /**
-   * 피드 좋아요 카운트 수정
-   * 
-   * @param feed
-   * @param size
-   * @return
-   */
-  public Feed setLikeCount(Feed feed, int likeCount) {
-    // TODO Auto-generated method stub
-    Assert.notNull(feed, "피드를 선택해주세요.");
-    
-    feed.setLikeCount(likeCount);
-
-    return feedRepository.save(feed);
   }
 }
