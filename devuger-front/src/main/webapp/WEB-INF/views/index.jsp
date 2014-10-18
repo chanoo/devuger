@@ -17,6 +17,7 @@
 						<dd><a href="#">아이폰</a></dd>
 						<dd><a href="#">안드로이드</a></dd>
 						<dd><a href="#">자바</a></dd>
+						<dd><a href="#">프론트엔드</a></dd>
 						<dd><a href="#">구인구직</a></dd>
 					</dl>
 	
@@ -51,7 +52,11 @@
 								  	</div>
 						  		</div>
 									<div class="form-group">
-										<div class="col-lg-10 col-lg-offset-2 text-right">
+										<div class="col-xs-7">
+											<a href="#" class="btn btn-primary btn-xs">+ 파일</a>
+											<a href="#" class="btn btn-primary btn-xs">+ 코드</a>
+										</div>
+										<div class="col-xs-5 text-right">
 											<button class="btn btn-link btn-xs">취소</button>
 											<button type="submit" class="btn btn-success btn-xs">게시</button>
 										</div>
@@ -112,6 +117,14 @@
 											<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
 										</c:if>
 									</p>
+									<c:forEach items="${feed.sources}" var="code">
+									<pre>
+										<code>
+${code.codeEscape}
+										</code>
+									</pre>
+									</c:forEach>
+									
 									<hr/>
 									<dl class="clear">
 									<c:forEach items="${feed.comments}" var="comment">
@@ -125,7 +138,7 @@
 								</div>
 			
 								<div class="panel-footer">
-									<div class="input-placeholder">Add a comment...</div>
+									<div class="input-placeholder">코멘트 작성...</div>
 								</div>
 			
 								<div class="panel-google-plus-comment">
@@ -186,6 +199,7 @@
 	</div>
 </div>
 <script type="text/javascript">
+
 $("#feed-form").submit(function() {
   
 	var frm = $(this).serialize();
@@ -204,7 +218,19 @@ $("#feed-form").submit(function() {
 	return false;
 });
 
-$(document).ready(function(){
+$(function() {
+
+  $('pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
+
+  $(".feeds").autolink();
+  $(".timeago").timeago();
+  $('.float').affix();
+  
+  $('div[data-spy="affix"]').each(function() {
+    $(this).width($(this).parent().width());
+  });
   
   $(".remove").click(function (e) {
   	e.preventDefault();
@@ -225,19 +251,7 @@ $(document).ready(function(){
   	
   	return false;
   });
-  
-});
 
-$(function() {
-
-  $(".feeds").autolink();
-  $(".timeago").timeago();
-  $('.float').affix();
-
-  $('div[data-spy="affix"]').each(function() {
-    $(this).width($(this).parent().width());
-  });
-  
   $(
       '.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]')
       .on('click', function(event) {

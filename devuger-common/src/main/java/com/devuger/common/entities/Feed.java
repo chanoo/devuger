@@ -3,7 +3,6 @@ package com.devuger.common.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,28 +34,25 @@ public class Feed extends AbstractEntity implements Serializable {
    */
   private static final long serialVersionUID = 7655117641213144664L;
   
-  @Column(nullable=true, length=255)
-  private String title; // 제목
-  @Column(nullable=true, columnDefinition="TEXT")
+  @Column(nullable=false, columnDefinition="TEXT")
   private String message; // 메시지
   @JsonIgnoreProperties({ "feed" })
   @OneToMany(mappedBy="feed", fetch=FetchType.EAGER)
   private List<Comment> comments;
   @JsonIgnoreProperties({ "feed" })
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
   private List<Like> likes;
+  @JsonIgnoreProperties({ "feed" })
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
   private List<FeedReport> feedReports;
+  @JsonIgnoreProperties({ "feed" })
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
+  private List<Source> sources;
   @Transient
   private boolean liked = false;
-  public String getTitle() {
-    return title;
-  }
-  public void setTitle(String title) {
-    this.title = title;
-  }
   public String getMessage() {
     return message;
   }
@@ -86,5 +82,11 @@ public class Feed extends AbstractEntity implements Serializable {
   }
   public void setLiked(boolean liked) {
     this.liked = liked;
+  }
+  public List<Source> getSources() {
+    return sources;
+  }
+  public void setSources(List<Source> sources) {
+    this.sources = sources;
   }
 }
