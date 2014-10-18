@@ -39,9 +39,7 @@ public class Source extends AbstractEntity implements Serializable {
   private String code; // 코드
   @Transient
   private String codeEscape;
-  @Column(nullable=false, length=20)
-  private String language; // 언어
-  @Column(nullable=false, length=255)
+  @Column(nullable=true, length=255)
   private String comment; // 코멘트
   public Feed getFeed() {
     return feed;
@@ -54,12 +52,6 @@ public class Source extends AbstractEntity implements Serializable {
   }
   public void setCode(String code) {
     this.code = code;
-  }
-  public String getLanguage() {
-    return language;
-  }
-  public void setLanguage(String language) {
-    this.language = language;
   }
   public String getCodeEscape() {
     return HtmlUtils.htmlEscape(code);

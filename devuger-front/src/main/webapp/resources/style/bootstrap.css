@@ -101,6 +101,7 @@ hr {
 }
 pre {
   overflow: hidden;
+  margin: 0;
 }
 code,
 kbd,

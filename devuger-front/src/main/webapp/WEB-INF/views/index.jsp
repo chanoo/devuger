@@ -107,6 +107,15 @@
 								</div>
 								<div class="panel-body">
 									<p>${fn:replace(feed.message, crlf, "<br/>")}</p>
+									<c:forEach items="${feed.sources}" var="source">
+									<span>${source.comment}</span>
+									<pre>
+										<code>
+${source.codeEscape}
+										</code>
+									</pre>
+									</c:forEach>
+									<br/>
 									<p>
 										<c:if test="${fn:length(feed.likes) ne 0}">
 											<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
@@ -117,14 +126,6 @@
 											<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
 										</c:if>
 									</p>
-									<c:forEach items="${feed.sources}" var="code">
-									<pre>
-										<code>
-${code.codeEscape}
-										</code>
-									</pre>
-									</c:forEach>
-									
 									<hr/>
 									<dl class="clear">
 									<c:forEach items="${feed.comments}" var="comment">
@@ -227,6 +228,12 @@ $(function() {
   $(".feeds").autolink();
   $(".timeago").timeago();
   $('.float').affix();
+  $('pre').readmore({
+    speed: 75,
+    heightMargin: 100,
+    moreLink: '<a href="#" class="btn-link btn-xs">더보기</a>',
+		lessLink: '<a href="#" class="btn-link btn-xs">닫기</a>'
+  });
   
   $('div[data-spy="affix"]').each(function() {
     $(this).width($(this).parent().width());

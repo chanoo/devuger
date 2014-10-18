@@ -20,10 +20,11 @@
 <meta property="og:description" content="${og.description}" />
 </c:if>	
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css" />" />
+<link rel="stylesheet" href="<c:url value="/resources/js/highlight/styles/default.css" />" />
 <link rel="stylesheet" href="<c:url value="/resources/style/bootstrap.css" />" >
 <link rel="stylesheet" href="http://bootswatch.com/assets/css/bootswatch.min.css">
-<link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css" />" />
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/style/custom.css" />" >
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.11.1.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/highlight/highlight.pack.js"/>"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
