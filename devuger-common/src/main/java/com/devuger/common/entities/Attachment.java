@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -29,6 +31,9 @@ public class Attachment extends AbstractEntity implements Serializable {
    * 
    */
   private static final long serialVersionUID = -6407247111414717647L;
+  @ManyToOne
+  @JoinColumn(name = "feed", nullable = false)
+  private Feed feed;
   private String name;
 	private long size;
 	private String contentType;
@@ -47,7 +52,13 @@ public class Attachment extends AbstractEntity implements Serializable {
 	@Transient
 	@JsonIgnore
 	private InputStream inputStream;
-	public String getName() {
+	public Feed getFeed() {
+    return feed;
+  }
+  public void setFeed(Feed feed) {
+    this.feed = feed;
+  }
+  public String getName() {
 		return name;
 	}
 	public void setName(String name) {

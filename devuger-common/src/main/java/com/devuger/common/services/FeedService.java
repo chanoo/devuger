@@ -39,7 +39,7 @@ public class FeedService extends BaseService {
   public Feed add(Feed feed, User createdBy)
   {
     Assert.notNull(feed, "메시지를 입력 해주세요.");
-    Assert.notNull(feed.getMessage(), "메시지를 입력 해주세요.");
+    Assert.hasText(feed.getMessage(), "지금 하고 싶은 이야기나 공유하고 싶은 정보를 적어주세요!");
     Assert.notNull(createdBy, "로그인 해주세요.");
     
     feed.setCreatedBy(createdBy);

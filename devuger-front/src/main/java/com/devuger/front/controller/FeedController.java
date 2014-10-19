@@ -1,6 +1,7 @@
 package com.devuger.front.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.devuger.common.entities.Feed;
 import com.devuger.common.entities.Like;
+import com.devuger.common.entities.Source;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
 import com.devuger.common.support.base.BaseResult;
@@ -52,6 +54,11 @@ public class FeedController extends BaseController {
 
     User user = UserSession.isSignin(request);
     feed = feedService.add(feed, user);
+    
+    String[] codes = ServletRequestUtils.getStringParameters(request, "source.code");
+    String[] comments = ServletRequestUtils.getStringParameters(request, "source.comment");
+    List<Source> sources = sourceService.adds(feed, codes, comments, user);
+    feed.setSources(sources);
 
     return new BaseResult("작성 되었습니다.");
   }

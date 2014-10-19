@@ -3,6 +3,7 @@ package com.devuger.common.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,16 +42,24 @@ public class Feed extends AbstractEntity implements Serializable {
   private List<Comment> comments;
   @JsonIgnoreProperties({ "feed" })
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
   private List<Like> likes;
   @JsonIgnoreProperties({ "feed" })
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
   private List<FeedReport> feedReports;
   @JsonIgnoreProperties({ "feed" })
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
   private List<Source> sources;
+  @JsonIgnoreProperties({ "feed" })
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  private List<OpenGraph> openGraphs;
+  @JsonIgnoreProperties({ "feed" })
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  private List<Attachment> attachments;
   @Transient
   private boolean liked = false;
   public String getMessage() {
@@ -88,5 +97,17 @@ public class Feed extends AbstractEntity implements Serializable {
   }
   public void setSources(List<Source> sources) {
     this.sources = sources;
+  }
+  public List<OpenGraph> getOpenGraphs() {
+    return openGraphs;
+  }
+  public void setOpenGraphs(List<OpenGraph> openGraphs) {
+    this.openGraphs = openGraphs;
+  }
+  public List<Attachment> getAttachments() {
+    return attachments;
+  }
+  public void setAttachments(List<Attachment> attachments) {
+    this.attachments = attachments;
   }
 }

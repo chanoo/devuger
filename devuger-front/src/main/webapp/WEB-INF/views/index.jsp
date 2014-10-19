@@ -16,8 +16,8 @@
 						<dt>그룹</dt>
 						<dd><a href="#">아이폰</a></dd>
 						<dd><a href="#">안드로이드</a></dd>
-						<dd><a href="#">자바</a></dd>
 						<dd><a href="#">프론트엔드</a></dd>
+						<dd><a href="#">백엔드</a></dd>
 						<dd><a href="#">구인구직</a></dd>
 					</dl>
 	
@@ -51,10 +51,12 @@
 								  		<textarea name="message" placeholder="지금 하고 싶은 이야기나 공유하고 싶은 정보를 적어주세요!" rows="3" cols="200" class="form-control"></textarea>
 								  	</div>
 						  		</div>
+						  		<div id="source">
+						  		</div>
 									<div class="form-group">
 										<div class="col-xs-7">
-											<a href="#" class="btn btn-primary btn-xs">+ 파일</a>
-											<a href="#" class="btn btn-primary btn-xs">+ 코드</a>
+											<a href="javascript:void(0);" id="add-file" class="btn btn-primary btn-xs">+ 파일</a>
+											<a href="javascript:void(0);" id="add-code" class="btn btn-primary btn-xs">+ 코드</a>
 										</div>
 										<div class="col-xs-5 text-right">
 											<button class="btn btn-link btn-xs">취소</button>
@@ -200,6 +202,37 @@ ${source.codeEscape}
 	</div>
 </div>
 <script type="text/javascript">
+
+$("#add-file").click(function() {
+  
+  alert("파일 추가");
+  
+});
+
+$("#add-code").click(function() {
+
+  var html = "";
+	html += '<div class="well">';
+	html += '  <div class="form-group">';
+	html += '    <div class="col-xs-12">';
+	html += '  		<textarea name="source.code" placeholder="코드를 입력해주세요." rows="3" cols="200" class="form-control"></textarea>';
+	html += '  	</div>';
+	html += '	</div>';
+	html += '  <div class="form-group">';
+	html += '    <div class="col-xs-12">';
+	html += '  		<input type="text" name="source.comment" placeholder="코드 코멘트" class="form-control"></textarea>';
+	html += '  	</div>';
+	html += '	</div>';
+	html += ' <div class="text-right"><button type="button" class="btn btn-link btn-xs remove-code">삭제</button></div>';
+	html += '</div>';
+
+	$(html).appendTo("#source");
+  
+});
+
+$("#source").on("click", ".remove-code", function() {
+  $(this).parent().parent().remove();
+});
 
 $("#feed-form").submit(function() {
   

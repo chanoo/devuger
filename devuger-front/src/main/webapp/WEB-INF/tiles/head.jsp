@@ -42,11 +42,3 @@
   ga('send', 'pageview');
 
 </script>
-
-<script src="jquery.timeago.js"></script>
-<script src="locales/jquery.timeago.ko.js"></script>
-<script>
-$(document).ready(function() {
-	$(".timeago").timeago();
-});
-</script>
