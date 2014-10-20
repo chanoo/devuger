@@ -65,7 +65,7 @@ public class HomeController extends BaseController {
   @RequestMapping(value = "/opengraph")
   public BaseResult signin(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    User user = userService.signup(null);
+    User user = userService.signup(null, request.getRemoteAddr());
 
     String getUrl = request.getParameter("url");
 

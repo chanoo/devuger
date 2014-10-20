@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.devuger.common.entities.Comment;
 import com.devuger.common.entities.Feed;
 import com.devuger.common.entities.Like;
 import com.devuger.common.entities.Source;
@@ -37,6 +38,26 @@ import com.devuger.front.common.session.UserSession;
 @Controller
 @RequestMapping("/feeds")
 public class FeedController extends BaseController {
+
+  
+  /**
+   * 피드리스트
+   * 
+   * @param request
+   * @param model
+   * @param comment
+   * @return
+   */
+  @RequestMapping(method = RequestMethod.GET)
+  public String index(HttpServletRequest request, Model model, @ModelAttribute Comment comment) {
+    
+    int page = ServletRequestUtils.getIntParameter(request, "page", 1);
+
+    Page<Feed> feeds = feedService.getAll(page);
+    model.addAttribute("feeds", feeds);
+    
+    return "feeds";
+  }
 
   /**
    * 피드 추가

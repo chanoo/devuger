@@ -59,7 +59,7 @@
 											<a href="javascript:void(0);" id="add-code" class="btn btn-primary btn-xs">+ 코드</a>
 										</div>
 										<div class="col-xs-5 text-right">
-											<button class="btn btn-link btn-xs">취소</button>
+											<button type="reset" class="btn btn-link btn-xs">취소</button>
 											<button type="submit" class="btn btn-success btn-xs">게시</button>
 										</div>
 									</div>
@@ -74,91 +74,7 @@
 				</div>
 
 				<!-- 피드 리스트 시작 -->
-				<div class="feeds">
-				<c:forEach items="${feeds.content}" var="feed">
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="[ panel panel-default ] panel-google-plus">
-								<div class="dropdown">
-									<span class="dropdown-toggle" type="button" data-toggle="dropdown">
-										<span class="[ glyphicon glyphicon-chevron-down ]"></span>
-									</span>
-									<ul class="dropdown-menu" role="menu">
-										<li role="presentation"><a role="menuitem" tabindex="-1" href="${contextPath}/feeds/${feed.id}">이 게시물 주소복사</a></li>
-										<li role="presentation"><a role="menuitem" tabindex="-1" href="#">이 게시물 신고</a></li>
-										<c:if test="${feed.createdBy.id eq user.id}">
-										<li role="presentation" class="divider"></li>
-											<li role="presentation"><a role="menuitem" tabindex="-1" href="${contextPath}/feeds/${feed.id}/remove.json">삭제</a></li>
-										</c:if>
-									</ul>
-								</div>
-								<div class="panel-google-plus-tags">
-									<ul>
-										<li>#Millennials</li>
-										<li>#Generation</li>
-									</ul>
-								</div>
-								<div class="panel-heading">
-									<img class="[ img-circle pull-left ]"
-										src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg"
-										alt="Mouse0270" />
-									<h3>${feed.createdBy.username}</h3>
-									<h5>
-										<span class="timeago" title="${feed.createdOn}">${feed.createdOn}</span>
-									</h5>
-								</div>
-								<div class="panel-body">
-									<p>${fn:replace(feed.message, crlf, "<br/>")}</p>
-									<c:forEach items="${feed.sources}" var="source">
-									<span>${source.comment}</span>
-									<pre>
-										<code>
-${source.codeEscape}
-										</code>
-									</pre>
-									</c:forEach>
-									<br/>
-									<p>
-										<c:if test="${fn:length(feed.likes) ne 0}">
-											<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
-											${fn:length(feed.likes)}명이 좋아해요.
-										</c:if>
-										<c:if test="${fn:length(feed.likes) eq 0}">
-											제일 처음
-											<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
-										</c:if>
-									</p>
-									<hr/>
-									<dl class="clear">
-									<c:forEach items="${feed.comments}" var="comment">
-										<dd style="margin-bottom:4px;">
-											<span class="label label-default">${comment.createdBy.username}</span>
-											${comment.content}, <fmt:formatDate pattern="MM/dd/yyyy" value="${comment.createdOn}" />
-											<a href="${contextPath}/comments/${comment.id}/remove.json" class="remove">×</a>
-										</dd>
-									</c:forEach>
-									</dl>
-								</div>
-			
-								<div class="panel-footer">
-									<div class="input-placeholder">코멘트 작성...</div>
-								</div>
-			
-								<div class="panel-google-plus-comment">
-									<img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
-									<form:form modelAttribute="comment" action="${contextPath}/comments/add.json" method="post" class="panel-google-plus-textarea">
-										<form:hidden path="feed.id" value="${feed.id}"/>
-										<form:textarea path="content" rows="3"/>
-										<button type="submit" class="[ btn btn-success disabled ]">Post comment</button>
-										<button type="reset" class="[ btn btn-default ]">Cancel</button>
-									</form:form>
-									<div class="clearfix"></div>
-								</div>
-								
-							</div>
-						</div>
-					</div>
-				</c:forEach>
+				<div id="feeds">
 				</div>
 				<!-- 피드 리스트 끝 -->
 			</div>
@@ -215,7 +131,7 @@ $("#add-code").click(function() {
 	html += '<div class="well">';
 	html += '  <div class="form-group">';
 	html += '    <div class="col-xs-12">';
-	html += '  		<textarea name="source.code" placeholder="코드를 입력해주세요." rows="3" cols="200" class="form-control"></textarea>';
+	html += '  		<textarea name="source.code" placeholder="코드를 입력해주세요." rows="5" cols="200" class="form-control"></textarea>';
 	html += '  	</div>';
 	html += '	</div>';
 	html += '  <div class="form-group">';
@@ -252,13 +168,18 @@ $("#feed-form").submit(function() {
 	return false;
 });
 
+var currentPage = 1;
+var isLastPage = false;
+
 $(function() {
+
+  feeds(currentPage);
 
   $('pre code').each(function(i, block) {
     hljs.highlightBlock(block);
   });
 
-  $(".feeds").autolink();
+  $("#feeds").autolink();
   $(".timeago").timeago();
   $('.float').affix();
   $('pre').readmore({
@@ -266,6 +187,12 @@ $(function() {
     heightMargin: 100,
     moreLink: '<a href="#" class="btn-link btn-xs">더보기</a>',
 		lessLink: '<a href="#" class="btn-link btn-xs">닫기</a>'
+  });
+  
+  $(window).scroll(function() {
+    if($(window).scrollTop() >= $(document).height() - $(window).height() && isLastPage == false) {
+      feeds(currentPage);
+    }
   });
   
   $('div[data-spy="affix"]').each(function() {
@@ -317,4 +244,21 @@ $(function() {
         }
       });
 });
+
+function feeds(page) {
+
+  $.ajax({
+      url : "${contextPath}/feeds?page={0}".format(page),
+      type : "get",
+    	dataType : "html",
+      async : false,
+      success : function(result) {
+        
+        $(result).appendTo("#feeds");
+        currentPage++;
+
+      }
+    });
+
+}
 </script>

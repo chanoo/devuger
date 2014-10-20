@@ -40,6 +40,6 @@
 		<put-attribute name="layout.content" value="/WEB-INF/views/{1}.jsp"></put-attribute>
 	</definition>
 
-	<definition name="subscribe" template="/WEB-INF/views/subscribe.jsp" />
+	<definition name="feeds" template="/WEB-INF/views/feeds.jsp" />
 
 </tiles-definitions>
