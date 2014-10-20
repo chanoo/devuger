@@ -2,10 +2,12 @@ package com.devuger.front.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,11 +58,17 @@ public class UserController extends BaseController {
    * @return
    */
   @RequestMapping(value = "/signup", method = RequestMethod.POST)
-  public String signup(HttpServletRequest request, HttpServletResponse response, Model model, @ModelAttribute User user)
+  public String signup(HttpServletRequest request, HttpServletResponse response, Model model, @Valid@ModelAttribute User user, BindingResult result)
   {
-    user  = userService.signup(user);
-    
-    return "redirect:";
+	  if(result.hasErrors()){
+		  return "none/users.signup";
+	  }
+
+	  String ip = request.getRemoteAddr();
+      user  = userService.signup(user, ip);
+  
+      return "none/users.signup.ok";
+
   }
   
   /**

@@ -41,10 +41,30 @@ public class UserService extends BaseService {
    * @param user 사용자 정보
    * @return 사용자 정보
    */
-  public User signup(User user) {
+  public User signup(User user, String ip) {
     // TODO Auto-generated method stub
     Assert.notNull(user, "가입 정보가 없습니다.");
+    Assert.hasText(user.getEmail(), "이메일을 입력해주세요.");
+    Assert.hasText(user.getUsername(), "사용자명을 입력해주세요.");
+    Assert.hasText(user.getHashedPassword(), "비밀번호를 입력해주세요.");
+    Assert.hasText(user.getHashedPasswordConfirm(), "비밀번호 확인을 입력해주세요.");
     
+    Assert.isTrue(user.getHashedPassword().equals(user.getHashedPasswordConfirm()), "비밀번호 확인이 잘못되었습니다.");
+    
+    Assert.isNull ( userRepository.findByEmail(user.getEmail()), "이미 가입된 이메일입니다.");
+    
+    user.setCreatedBy( userRepository.getOne(1L));
+    user.setLastSigninDate(new Date());
+    user.setLastSigninIp(ip);
+    user.setCreatedOn(new Date());
+    user.setToken("1");
+    // 사용자 입력
+    user = userRepository.save(user);
+    
+    
+    // 비밀번호 업데이트
+    user.setHashedPassword(passwordEncoder.encodePassword(user.getHashedPassword(), user.getId().toString()));
+   	
     return userRepository.save(user);
   }
 

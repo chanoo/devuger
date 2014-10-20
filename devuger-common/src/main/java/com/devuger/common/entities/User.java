@@ -10,9 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.AssertTrue;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -35,10 +37,13 @@ public class User extends AbstractEntity implements Serializable {
    * 
    */
   private static final long serialVersionUID = 1827889442772094376L;
+  @NotEmpty(message="사용자명을 입력하세요")
   @Column(nullable=false, length=100)
   private String username;
+  @NotEmpty(message="이메일을 입력하세요")
   @Column(nullable=false, length=255)
   private String email;
+  @NotEmpty(message="비밀번호를 입력하세요")
   @JsonIgnore
   @Column(nullable=false, length=255)
   private String hashedPassword;
@@ -50,11 +55,14 @@ public class User extends AbstractEntity implements Serializable {
   @JsonIgnore
   @Column(nullable=false, length=20)
   private String lastSigninIp;
+  @NotEmpty(message="비밀번호 확인을 입력하세요")
   @Transient
   private String hashedPasswordConfirm;
+  @AssertTrue(message="서비스 이용약관에 동의해주세요.")
   @JsonIgnore
   @Transient
   private boolean serviceTerms;
+  @AssertTrue(message="개인정보취급방침에 동의해주세요.")
   @JsonIgnore
   @Transient
   private boolean userInfoTerms;
