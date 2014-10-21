@@ -44,11 +44,11 @@
 					<div class="col-xs-12">
 
 						<div class="panel panel-default">
-						  <div class="panel-body">
+						  <div class="panel-body animated">
 						  	<form:form cssClass="form-horizontal" action="${contextPath}/feeds/add.json" id="feed-form">
 							    <div class="form-group">
 							      <div class="col-xs-12">
-								  		<textarea name="message" placeholder="지금 하고 싶은 이야기나 공유하고 싶은 정보를 적어주세요!" rows="3" cols="200" class="form-control animated"></textarea>
+								  		<textarea name="message" placeholder="지금 하고 싶은 이야기나 공유하고 싶은 정보를 적어주세요!" rows="2" cols="200" class="form-control animated"></textarea>
 								  	</div>
 						  		</div>
 						  		<div id="source">
@@ -131,7 +131,7 @@ $("#add-code").click(function() {
 	html += '<div class="well">';
 	html += '  <div class="form-group">';
 	html += '    <div class="col-xs-12">';
-	html += '  		<textarea name="source.code" placeholder="코드를 입력해주세요." rows="5" cols="200" class="form-control"></textarea>';
+	html += '  		<textarea name="source.code" placeholder="코드를 입력해주세요." rows="4" cols="200" class="form-control animated"></textarea>';
 	html += '  	</div>';
 	html += '	</div>';
 	html += '  <div class="form-group">';
@@ -143,7 +143,7 @@ $("#add-code").click(function() {
 	html += '</div>';
 
 	$(html).appendTo("#source");
-  
+	$('textarea').autosize();
 });
 
 $("#source").on("click", ".remove-code", function() {
