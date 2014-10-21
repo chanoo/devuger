@@ -42,23 +42,23 @@ public class Feed extends AbstractEntity implements Serializable {
   private List<Comment> comments;
   @JsonIgnoreProperties({ "feed" })
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
   private List<Like> likes;
   @JsonIgnoreProperties({ "feed" })
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
   private List<FeedReport> feedReports;
   @JsonIgnoreProperties({ "feed" })
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
   private List<Source> sources;
   @JsonIgnoreProperties({ "feed" })
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
   private List<OpenGraph> openGraphs;
   @JsonIgnoreProperties({ "feed" })
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  @OneToMany(mappedBy="feed", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
   private List<Attachment> attachments;
   @Transient
   private boolean liked = false;

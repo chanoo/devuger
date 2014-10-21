@@ -52,7 +52,12 @@ ${source.codeEscape}
 					<br/>
 					<p>
 						<c:if test="${fn:length(feed.likes) ne 0}">
-							<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
+							<c:if test="${feed.liked eq true}">
+								<a href="${contextPath}/feeds/${feed.id}/unlike.json">좋아요 취소</a>
+							</c:if>
+							<c:if test="${feed.liked eq false}">
+								<a href="${contextPath}/feeds/${feed.id}/like.json">좋아요</a>
+							</c:if>
 							${fn:length(feed.likes)}명이 좋아해요.
 						</c:if>
 						<c:if test="${fn:length(feed.likes) eq 0}">

@@ -53,7 +53,20 @@ public class FeedController extends BaseController {
     
     int page = ServletRequestUtils.getIntParameter(request, "page", 1);
 
+    User createdBy = UserSession.get(request);
     Page<Feed> feeds = feedService.getAll(page);
+    if (!feeds.getContent().isEmpty()) {
+      List<Like> likes = likeService.getByCreatedByAndFeed(createdBy, feeds.getContent());
+      for(Feed feed : feeds) {
+        for(Like like : likes) {
+          if (feed.equals(like.getFeed())) {
+            feed.setLiked(true);
+            likes.remove(like);
+            break;
+          }
+        }
+      }
+    }
     model.addAttribute("feeds", feeds);
     
     return "feeds";

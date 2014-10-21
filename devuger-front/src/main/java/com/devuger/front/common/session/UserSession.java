@@ -85,6 +85,7 @@ public class UserSession extends BaseObject {
 	public static void signout(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+    session.removeAttribute(GlobalConst.USER_PK_SESSION);
 		session.removeAttribute(GlobalConst.USER_SESSION);
 	}
 }

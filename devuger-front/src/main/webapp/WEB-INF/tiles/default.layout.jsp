@@ -59,6 +59,7 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 </div>
 </compress:html>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.autolink.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.autosize.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/timeago/jquery.timeago.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/timeago/locales/jquery.timeago.ko.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/readmore.min.js"/>"></script>

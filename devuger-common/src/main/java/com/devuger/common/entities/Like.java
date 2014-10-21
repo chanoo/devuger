@@ -30,7 +30,7 @@ public class Like extends AbstractEntity implements Serializable {
    */
   private static final long serialVersionUID = -1907218816750055462L;
 
-  @ManyToOne(cascade=CascadeType.MERGE)
+  @ManyToOne
   @JoinColumn(name = "feed", nullable = false)
   private Feed feed;
   public Feed getFeed() {

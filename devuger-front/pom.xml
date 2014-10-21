@@ -7,9 +7,7 @@
     <artifactId>devuger</artifactId>
     <version>1.0.0-RELEASE</version>
   </parent>
-  <groupId>com.devuger</groupId>
   <artifactId>devuger-front</artifactId>
-  <version>1.0.0-RELEASE</version>
   <packaging>war</packaging>
   <name>devuger-front Maven Webapp</name>
   <url>http://maven.apache.org</url>

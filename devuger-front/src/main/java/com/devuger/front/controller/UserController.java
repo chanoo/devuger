@@ -2,7 +2,6 @@ package com.devuger.front.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
 import com.devuger.common.support.base.BaseResult;
+import com.devuger.common.validation.SignupValidator;
 import com.devuger.front.common.session.UserSession;
 
 /**
@@ -43,8 +43,7 @@ public class UserController extends BaseController {
    * @return
    */
   @RequestMapping(value = "/signup", method = RequestMethod.GET)
-  public String signupView(HttpServletRequest request, HttpServletResponse response, Model model, @ModelAttribute User user)
-  {
+  public String signupView(HttpServletRequest request, HttpServletResponse response, Model model, @ModelAttribute User user) {
     return "none/users.signup";
   }
   
@@ -58,19 +57,25 @@ public class UserController extends BaseController {
    * @return
    */
   @RequestMapping(value = "/signup", method = RequestMethod.POST)
-  public String signup(HttpServletRequest request, HttpServletResponse response, Model model, @Valid@ModelAttribute User user, BindingResult result)
-  {
-	  if(result.hasErrors()){
-		  return "none/users.signup";
-	  }
+  public String signup(HttpServletRequest request, HttpServletResponse response, Model model, @ModelAttribute User user, BindingResult bindingResult) {
 
-	  String ip = request.getRemoteAddr();
-      user  = userService.signup(user, ip);
-  
-      return "none/users.signup.ok";
+    new SignupValidator().validate(user, bindingResult); //validation을 수행한다.
+    if(bindingResult.hasErrors()){ //validation 에러가 있으면,
+      this.getLogger().error("Validation Error, 가입 실패");
+      return "none/users.signup";
+    }
 
+    try {
+      String ip = request.getRemoteAddr();
+      user = userService.signup(user, ip);
+    } catch (Exception e) {
+      model.addAttribute("message", e.getLocalizedMessage());
+      return "none/users.signup";
+    }
+
+    return "none/users.signup.ok";
   }
-  
+
   /**
    * 사용자 로그인 화면
    * 
@@ -120,8 +125,9 @@ public class UserController extends BaseController {
 	 * @return
 	 */
   @RequestMapping(value = "/signout", method = RequestMethod.GET)
-  public BaseResult signout(HttpServletRequest request, HttpServletResponse response, Model model)
+  public String signout(HttpServletRequest request, HttpServletResponse response, Model model)
   {
-    return new BaseResult("로그아웃 되었습니다.");
+    UserSession.signout(request);
+    return String.format("redirect:%s/", request.getContextPath());
   }
 }

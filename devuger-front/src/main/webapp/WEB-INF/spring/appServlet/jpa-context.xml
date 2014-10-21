@@ -1,54 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans
-	xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
-	<jpa:repositories base-package="com.devuger.common.repositories" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
+	<jpa:repositories base-package="com.devuger.common.repositories"
+		transaction-manager-ref="transactionManager"
+		entity-manager-factory-ref="entityManagerFactory" />
 
-		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-			<property name="jndiName" value="java:/comp/env/jdbc/Devuger" />
-			<property name="resourceRef" value="true" />
-		</bean>
-	
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan">
-        	<list>
-        		<value>com.devuger.common.entities</value>
-        	</list>
-        </property>
-        <!-- property name="persistenceUnitName" value="spring-jpa" / -->
-        <!-- property name="mappingResources" value="/WEB-INF/spring/orm.xml"/ -->
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-	            <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />        
-                <property name="showSql" value="false" />
-				<property name="database" value="MYSQL"/>
-            </bean>
-        </property>
-        <property name="jpaProperties">
-        	<props>
-                <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.c3p0.preferredTestQuery">SELECT 1</prop>
-                <prop key="hibernate.c3p0.testConnectionOnCheckout">true</prop>
-   	            <prop key="hibernate.hbm2ddl.auto">update</prop>
-   	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-  	            <prop key="org.hibernate.flushMode">COMMIT</prop>
-         	</props>
-        </property>
-    </bean>
- 
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-    	<property name="dataSource" ref="dataSource" />
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
- 
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:/comp/env/jdbc/Devuger" />
+		<property name="resourceRef" value="true" />
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>com.devuger.common.entities</value>
+			</list>
+		</property>
+		<!-- property name="persistenceUnitName" value="spring-jpa" / -->
+		<!-- property name="mappingResources" value="/WEB-INF/spring/orm.xml"/ -->
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+				<property name="showSql" value="false" />
+				<property name="database" value="MYSQL" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.c3p0.preferredTestQuery">SELECT 1</prop>
+				<prop key="hibernate.c3p0.testConnectionOnCheckout">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				<prop key="org.hibernate.flushMode">COMMIT</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>

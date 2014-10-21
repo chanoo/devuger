@@ -48,7 +48,7 @@
 						  	<form:form cssClass="form-horizontal" action="${contextPath}/feeds/add.json" id="feed-form">
 							    <div class="form-group">
 							      <div class="col-xs-12">
-								  		<textarea name="message" placeholder="지금 하고 싶은 이야기나 공유하고 싶은 정보를 적어주세요!" rows="3" cols="200" class="form-control"></textarea>
+								  		<textarea name="message" placeholder="지금 하고 싶은 이야기나 공유하고 싶은 정보를 적어주세요!" rows="3" cols="200" class="form-control animated"></textarea>
 								  	</div>
 						  		</div>
 						  		<div id="source">
@@ -179,6 +179,7 @@ $(function() {
     hljs.highlightBlock(block);
   });
 
+	$('textarea').autosize();
   $("#feeds").autolink();
   $(".timeago").timeago();
   $('.float').affix();
@@ -191,7 +192,9 @@ $(function() {
   
   $(window).scroll(function() {
     if($(window).scrollTop() >= $(document).height() - $(window).height() && isLastPage == false) {
-      feeds(currentPage);
+      if (!isLastPage) {
+        feeds(currentPage);
+      }
     }
   });
   
@@ -251,12 +254,23 @@ function feeds(page) {
       url : "${contextPath}/feeds?page={0}".format(page),
       type : "get",
     	dataType : "html",
-      async : false,
+      async:   false,
+      beforeSend: function( xhr ) {
+        $('<div id="ajax-load-image" class="text-center"><img src="${contextPath}/resources/img/ajax-load.gif" /></div>').appendTo("#feeds");
+      },
       success : function(result) {
         
-        $(result).appendTo("#feeds");
+        console.log("currentPage:" + currentPage);
+        
+        var html = result.trim();
+        if(html.length == 0) {
+          isLastPage = true;
+        }
+        
+        $(html).appendTo("#feeds");
         currentPage++;
 
+        $("#ajax-load-image").remove();
       }
     });
 

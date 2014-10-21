@@ -31,6 +31,10 @@ function isSuccess(json)
 	return true;
 }
 
+String.prototype.trim = function() {
+  return this.replace(/(^\s*)|(\s*$)/gi, "");
+}
+
 Number.prototype.format = function() {
     if(this==0) return 0;
     

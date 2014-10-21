@@ -16,7 +16,7 @@
 				<li><a href="#" data-toggle="modal" data-target="#signin-modal">로그인</a></li>		
 			</c:if>
 			<c:if test="${user ne null}">
-				<li><a href="javascript:alert('준비중');">로그아웃</a></li>		
+				<li><a href="${contextPath}/users/signout">로그아웃</a></li>		
 			</c:if>
 				<li><a href="https://github.com/chanoo/devuger" target="_blank">GitHub</a></li>
 		</ul>
@@ -43,7 +43,7 @@
 				</div>
 				
 				<div class="well bs-component">
-					<form:form id="signin-form" action="${contextPath}/users/signin" method="post" class="form-horizontal">
+					<form:form id="signin-form" action="${contextPath}/users/signin.json" method="post" class="form-horizontal">
 						<fieldset>
 
 							<div class="form-group">
@@ -74,14 +74,6 @@
       </div>
     </div>
   </div>
-</div>
-<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-      </div>
-		</div>
-	</div>
 </div>
 <script>
 $("#signin-form").submit(function() {
