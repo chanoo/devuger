@@ -9,16 +9,17 @@ public class PageNavigationTag extends TagSupport
 {
 	private static final long serialVersionUID = -4523450261010080425L;
 
-	private Long pageRange = 10L;
-	private Long pageSize = 20L;
-	private Long currentPage = 1L;
-	private Long lastPage = 0L;
-	private Long totalElements = 0L;
+	private int pageRange = 10;
+	private int pageSize = 20;
+	private int currentPage = 1;
+	private int lastPage = 0;
+	private int totalElements = 0;
+	private String url;
 
 	@Override 
 	public int doStartTag()
 	{
-	  if(totalElements == null)
+	  if(totalElements == 0)
 	    return SKIP_BODY;
 		// 모든 게시물 수를 바탕으로 마지막 페이지를 구한다.
 		if(totalElements > 0L)
@@ -27,57 +28,57 @@ public class PageNavigationTag extends TagSupport
 			if(totalElements % pageSize > 0) {
 				lastPage++;
 			}
-		} else if(totalElements.equals(0L)) {
-			lastPage = 0L;
+		} else if(totalElements == 0) {
+			lastPage = 0;
 		}
 		JspWriter out = pageContext.getOut();
 
 		try {
-			if(!lastPage.equals(0L))
+			if(lastPage != 0)
 			{
 				out.println("<ul class='pagination'>");
 
 				if(currentPage != 1) {
-					out.println("<li><a href='#page_1' title='1'><i class='fa fa-lg fa-angle-double-left'></i></a></li>");
+					out.println(String.format("<li><a href='%s1' title='1'><i class='fa fa-lg fa-angle-double-left'></i></a></li>", url));
 				}
 
 				if(lastPage <= pageRange) {
 						for(Long i = 1L; i <= lastPage; i++) {
-							if(currentPage.equals(i)) {
-								out.println("<li class='active'><a href='#' title='" + i + "'>" + i + "</a></li>");
+							if(currentPage == i) {
+								out.println(String.format("<li class='active'><a href='%s%d'>%d</a></li>", url, i, i));
 							} else {
-								out.println("<li><a href='#page_" + i + "' title='" + i + "'>" + i + "</a></li>");
+								out.println(String.format("<li><a href='%s%d'>%d</a></li>", url, i, i));
 							}
 						}
 				} else {
 					if(currentPage < pageRange / 2 + 1) {
 						for(Long i = 1L; i <= pageRange; i++) {
-							if(currentPage.equals(i)) {
-								out.println("<li class='active'><a href='#' title='" + i + "' class='page_no'>" + i + "</a></li>");
+							if(currentPage == i) {
+								out.println(String.format("<li class='active'><a href='%s%d' class='page_no'>%d</a></li>", url, i, i));
 							} else {
-								out.println("<li><a href='#page_" + i + "' title='" + i + "'>" + i + "</a></li>");
+								out.println(String.format("<li><a href='%s%d'>%d</a></li>", url, i, i));
 							}
 						}
 					} else if(currentPage > lastPage - pageRange / 2) {
-						for(Long i = lastPage - pageRange + 1; i <= lastPage; i++) {
-							if(currentPage.equals(i)) {
-								out.println("<li class='active'><a href='#' title='" + i + "' class='page_no'>" + i + "</a></li>");
+						for(int i = lastPage - pageRange + 1; i <= lastPage; i++) {
+              if(currentPage == i) {
+								out.println(String.format("<li class='active'><a href='%s%d' class='page_no'>%d</a></li>", url, i, i));
 							} else {
-								out.println("<li><a href='#page_" + i + "' title='" + i + "'>" + i + "</a></li>");
+								out.println(String.format("<li><a href='%s%d'>%d</a></li>", url, i, i));
 							}
 						}
 					} else {
-						for(Long i = currentPage - (pageRange/2 - 1); i <= currentPage + (pageRange / 2); i++) {
-							if(currentPage.equals(i)) {
-								out.println("<li class='active'><a href='#' title='" + i + "' class='page_no'>" + i + "</a></li>");
+						for(int i = currentPage - (pageRange/2 - 1); i <= currentPage + (pageRange / 2); i++) {
+              if(currentPage == i) {
+								out.println(String.format("<li class='active'><a href='%s%d' class='page_no'>%d</a></li>", url, i, i));
 							} else {
-								out.println("<li><a href='#page_" + i + "' title='" + i + "'>" + i + "</a></li>");
+								out.println(String.format("<li><a href='%s%d'>%d</a></li>", url, i, i));
 							}
 						}
 					}
 				}
-				if(!currentPage.equals(lastPage)) {
-					out.println("<li><a href='#page_" + lastPage + "' title='" + lastPage + "'><i class='fa fa-lg fa-angle-double-right'></i></a></li>");
+				if(currentPage != lastPage) {
+					out.println(String.format("<li><a href='%s%d'><i class='fa fa-lg fa-angle-double-right'></i></a></li>", url, lastPage));
 				}
 				out.println("</ul>");
 			}
@@ -89,34 +90,40 @@ public class PageNavigationTag extends TagSupport
 		return SKIP_BODY;
 	}
 
-	public Long getPageRange() {
-		return pageRange;
-	}
-	public void setPageRange(Long pageRange) {
-		this.pageRange = pageRange;
-	}
-	public Long getCurrentPage() {
-		return currentPage;
-	}
-	public void setCurrentPage(Long currentPage) {
-		this.currentPage = currentPage;
-	}
-	public Long getLastPage() {
-		return lastPage;
-	}
-	public void setLastPage(Long lastPage) {
-		this.lastPage = lastPage;
-	}
-	public Long getTotalElements() {
-		return totalElements;
-	}
-	public void setTotalElements(Long totalElements) {
-		this.totalElements = totalElements;
-	}
-	public Long getPageSize() {
-		return pageSize;
-	}
-	public void setPageSize(Long pageSize) {
-		this.pageSize = pageSize;
-	}
+  public int getPageRange() {
+    return pageRange;
+  }
+  public void setPageRange(int pageRange) {
+    this.pageRange = pageRange;
+  }
+  public int getPageSize() {
+    return pageSize;
+  }
+  public void setPageSize(int pageSize) {
+    this.pageSize = pageSize;
+  }
+  public int getCurrentPage() {
+    return currentPage;
+  }
+  public void setCurrentPage(int currentPage) {
+    this.currentPage = currentPage;
+  }
+  public int getLastPage() {
+    return lastPage;
+  }
+  public void setLastPage(int lastPage) {
+    this.lastPage = lastPage;
+  }
+  public int getTotalElements() {
+    return totalElements;
+  }
+  public void setTotalElements(int totalElements) {
+    this.totalElements = totalElements;
+  }
+  public String getUrl() {
+    return url;
+  }
+  public void setUrl(String url) {
+    this.url = url;
+  }
 }

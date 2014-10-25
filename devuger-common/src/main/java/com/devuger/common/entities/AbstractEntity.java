@@ -3,7 +3,6 @@ package com.devuger.common.entities;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +37,7 @@ public class AbstractEntity implements Serializable {
   @Column(nullable = false)
   private Date createdOn = new Date();
   @JsonIgnoreProperties
-  @ManyToOne(cascade=CascadeType.PERSIST)
+  @ManyToOne
   @JoinColumn(name = "createdBy", nullable = false)
   private User createdBy;
 

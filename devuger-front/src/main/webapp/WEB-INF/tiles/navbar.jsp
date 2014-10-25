@@ -47,20 +47,20 @@
 						<fieldset>
 
 							<div class="form-group">
-								<label for="email" class="col-xs-3 control-label">이메일</label>
-								<div class="col-xs-9">
+								<label for="email" class="col-lg-3 control-label">이메일</label>
+								<div class="col-lg-9">
 									<input type="text" name="email" id="email" class="form-control" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="hashedPassword" class="col-xs-3 control-label">비밀번호</label>
-								<div class="col-xs-9">
+								<label for="hashedPassword" class="col-lg-3 control-label">비밀번호</label>
+								<div class="col-lg-9">
 									<input type="password" name="hashedPassword" id="hashedPassword" class="form-control" />
 								</div>
 							</div>
 							<hr/>
 							<div class="form-group">
-								<div class="col-xs-9 col-xs-offset-3">
+								<div class="col-lg-9 col-lg-offset-3">
 									<button class="btn btn-primary btn-block">이메일로 로그인</button>
 								</div>
 							</div>

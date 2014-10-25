@@ -6,7 +6,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <div class="row">
 
-	<div class="col-xs-6 col-xs-offset-3">
+	<div class="col-lg-6 col-lg-offset-3">
 		<div class="panel panel-primary">
 			<div class="panel-body">
 		
@@ -27,36 +27,36 @@
 						<input type="hidden" name="redirect" value="${redirect}" />
 						<fieldset>
 							<div class="form-group">
-								<form:label path="email" cssClass="col-xs-3 control-label">이메일</form:label>
-								<div class="col-xs-9">
+								<form:label path="email" cssClass="col-lg-3 control-label">이메일</form:label>
+								<div class="col-lg-9">
 									<form:input path="email" class="form-control" data-validation="email" />
 									<small><form:errors path="email" cssClass="error"></form:errors></small>
 								</div>
 							</div>
 							<div class="form-group">
-								<form:label path="username" cssClass="col-xs-3 control-label">사용자명</form:label>
-								<div class="col-xs-9">
+								<form:label path="username" cssClass="col-lg-3 control-label">사용자명</form:label>
+								<div class="col-lg-9">
 									<form:input path="username" class="form-control" />
 									<small><form:errors path="username" cssClass="error"></form:errors></small>
 								</div>
 							</div>
 							<div class="form-group">
-								<form:label path="hashedPassword" cssClass="col-xs-3 control-label">비밀번호</form:label>
-								<div class="col-xs-9">
+								<form:label path="hashedPassword" cssClass="col-lg-3 control-label">비밀번호</form:label>
+								<div class="col-lg-9">
 									<form:password path="hashedPassword" class="form-control" />
 									<small><form:errors path="hashedPassword" cssClass="error"></form:errors></small>
 								</div>
 							</div>
 							<div class="form-group">
-								<form:label path="hashedPasswordConfirm" cssClass="col-xs-3 control-label">비밀번호 확인</form:label>
-								<div class="col-xs-9">
+								<form:label path="hashedPasswordConfirm" cssClass="col-lg-3 control-label">비밀번호 확인</form:label>
+								<div class="col-lg-9">
 									<form:password path="hashedPasswordConfirm" class="form-control"/>
 									<small><form:errors path="hashedPasswordConfirm" cssClass="error"></form:errors></small>
 								</div>
 							</div>
 							<br/>
 							<div class="form-group">
-								<div class="col-xs-9 col-xs-offset-3">
+								<div class="col-lg-9 col-lg-offset-3">
 									<form:checkbox path="serviceTerms" id="serviceTerms"></form:checkbox>
 									<form:label path="serviceTerms" cssClass="control-label"><a href="${contextPath}/terms/service" target="_blank">서비스이용약관</a>에 대해 동의합니다.</form:label>
 									<div>
@@ -65,7 +65,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="col-xs-9 col-xs-offset-3">
+								<div class="col-lg-9 col-lg-offset-3">
 									<form:checkbox path="userInfoTerms" id="userInfoTerms"></form:checkbox>
 									<form:label path="userInfoTerms" cssClass="control-label"><a href="${contextPath}/terms/service" target="_blank">개인정보취급방침</a>에 대해 동의합니다.</form:label>
 									<div>

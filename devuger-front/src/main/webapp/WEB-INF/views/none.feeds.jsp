@@ -9,7 +9,7 @@
 </jsp:scriptlet>
 <c:forEach items="${feeds.content}" var="feed">
 	<div class="row" id="feed-${feed.id}">
-		<div class="col-xs-12">
+		<div class="col-lg-12">
 			<div class="[ panel panel-default ] panel-google-plus">
 				<div class="dropdown">
 					<span class="dropdown-toggle" type="button" data-toggle="dropdown">
@@ -70,7 +70,7 @@ ${source.codeEscape}
 					<c:forEach items="${feed.comments}" var="comment">
 						<dd style="margin-bottom:4px;">
 							<span class="label label-default">${comment.createdBy.username}</span>
-							${comment.content}, <fmt:formatDate pattern="MM/dd/yyyy" value="${comment.createdOn}" />
+							${comment.content}, <span class="timeago" title="${comment.createdOn}">${comment.createdOn}</span>
 							<a href="${contextPath}/comments/${comment.id}/remove.json" class="remove">×</a>
 						</dd>
 					</c:forEach>

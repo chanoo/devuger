@@ -2,7 +2,7 @@ package com.devuger.common.support.constant;
 
 public class GlobalConst {
 	
-	public final static int PAGE_SIZE = 12;
+	public final static int PAGE_SIZE = 5;
 
 	public static final String SERVER_IP = "114.200.199.150";
 

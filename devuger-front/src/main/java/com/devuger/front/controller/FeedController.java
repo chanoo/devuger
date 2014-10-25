@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,11 +48,14 @@ public class FeedController extends BaseController {
    * @param model
    * @param comment
    * @return
+   * @throws ServletRequestBindingException 
    */
   @RequestMapping(method = RequestMethod.GET)
-  public String index(HttpServletRequest request, Model model, @ModelAttribute Comment comment) {
+  public String index(HttpServletRequest request, Model model, @ModelAttribute Comment comment)
+  throws ServletRequestBindingException {
     
     int page = ServletRequestUtils.getIntParameter(request, "page", 1);
+    String layout = ServletRequestUtils.getStringParameter(request, "layout", "feed");
 
     User createdBy = UserSession.get(request);
     Page<Feed> feeds = feedService.getAll(page);
@@ -67,9 +71,15 @@ public class FeedController extends BaseController {
         }
       }
     }
+
     model.addAttribute("feeds", feeds);
+    model.addAttribute("page", page);
+
+    if (layout.equals("feed")) {
+      return "feed.feeds";
+    }
     
-    return "feeds";
+    return "none.feeds";
   }
 
   /**

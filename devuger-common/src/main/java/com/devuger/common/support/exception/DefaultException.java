@@ -17,7 +17,7 @@ public class DefaultException implements HandlerExceptionResolver {
 
   private static final Logger logger = LoggerFactory.getLogger(DefaultException.class);
 
-  public static String RESULT_ERROR = "error";
+  public static boolean SUCCESS_ERROR = false;
   private String view;
 
   public void setView(String view) {
@@ -67,7 +67,7 @@ public class DefaultException implements HandlerExceptionResolver {
 
       StackTraceElement stacks[] = ex.getStackTrace();
       for (StackTraceElement stack : stacks) {
-        if (stack.getClassName().startsWith("com.devuger")) {
+        if (stack.getClassName().startsWith("com.voicecaddie")) {
           logger.error("--[Exception] " + stack.getClassName() + "::" + stack.getMethodName() + ":(" + stack.getLineNumber() + ") : " + ex.getMessage());
         }
       }
@@ -82,7 +82,7 @@ public class DefaultException implements HandlerExceptionResolver {
         String message = entEception.getMessage();
         String redirect = entEception.getRedirect();
         ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("result", RESULT_ERROR);
+        modelMap.addAttribute("success", SUCCESS_ERROR);
         modelMap.addAttribute("message", message);
         modelMap.addAttribute("redirect", redirect);
 
@@ -90,7 +90,7 @@ public class DefaultException implements HandlerExceptionResolver {
       } else {
 
         ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("result", RESULT_ERROR);
+        modelMap.addAttribute("success", SUCCESS_ERROR);
         modelMap.addAttribute("message", ex.getMessage());
 
         return new ModelAndView(new MappingJackson2JsonView(), modelMap);

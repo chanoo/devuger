@@ -233,9 +233,7 @@ public class AttachmentService extends BaseService {
     return attachment;
   }
 
-  public Attachment upload(User user, URLConnection urlConnection, InputStream is, String tableName, String tableColumn, Long tablePk, int sort, int width, int height, String comment) throws IOException {
-    Assert.notNull(tableName, "올바른 위치를 선택 해주세요. (1)");
-    Assert.notNull(tableColumn, "올바른 위치를 선택 해주세요. (2)");
+  public Attachment upload(User user, URLConnection urlConnection, InputStream is, int sort, int width, int height) throws IOException {
     Assert.notNull(urlConnection, "파일을 업로드 해주세요.");
 
     URL url = urlConnection.getURL();
@@ -312,9 +310,7 @@ public class AttachmentService extends BaseService {
     return attachment;
   }
 
-  public Attachment upload(User user, MultipartFile multipartFile, String tableName, String tableColumn, Long tablePk, int sort, String comment) throws IOException {
-    Assert.notNull(tableName, "올바른 위치를 선택 해주세요. (1)");
-    Assert.notNull(tableColumn, "올바른 위치를 선택 해주세요. (2)");
+  public Attachment upload(User user, MultipartFile multipartFile, int sort, String comment) throws IOException {
     Assert.notNull(multipartFile, "파일을 업로드 해주세요.");
     Assert.isTrue(!multipartFile.isEmpty(), "파일을 업로드 해주세요.");
 

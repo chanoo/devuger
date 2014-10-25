@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -59,12 +60,15 @@ public class User extends AbstractEntity implements Serializable {
   @Transient
   private boolean userInfoTerms;
   @JsonIgnore
-  @OneToMany(mappedBy="createdBy", fetch=FetchType.EAGER) 
+  @OneToMany(mappedBy="createdBy", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE) 
   private List<Device> devices;
   @JsonIgnore
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy="createdBy", fetch=FetchType.LAZY)
+  @OneToMany(mappedBy="createdBy", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
   private List<Comment> comments;
+  @JsonIgnore
+  @OneToMany(mappedBy="createdBy", cascade=CascadeType.REMOVE)
+  private List<Attachment> attachments;
   public String getEmail() {
     return email;
   }
@@ -130,5 +134,11 @@ public class User extends AbstractEntity implements Serializable {
   }
   public void setComments(List<Comment> comments) {
     this.comments = comments;
+  }
+  public List<Attachment> getAttachments() {
+    return attachments;
+  }
+  public void setAttachments(List<Attachment> attachments) {
+    this.attachments = attachments;
   }
 }

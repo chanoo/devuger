@@ -20,13 +20,13 @@
 <meta property="og:description" content="${og.description}" />
 </c:if>	
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css" />" />
-<link rel="stylesheet" href="<c:url value="/resources/js/highlight/styles/default.css" />" />
-<link rel="stylesheet" href="<c:url value="/resources/style/bootstrap.css" />" >
-<link rel="stylesheet" href="http://bootswatch.com/assets/css/bootswatch.min.css">
-<link rel="stylesheet" href="<c:url value="/resources/style/custom.css" />" >
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.11.1.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/highlight/highlight.pack.js"/>"></script>
+<link rel="stylesheet" href="${contextPath}/resources/css/font-awesome.min.css" />
+<link rel="stylesheet" href="${contextPath}/resources/js/highlight/styles/default.css" />
+<link rel="stylesheet" href="${contextPath}/resources/style/bootstrap.css" />
+<link rel="stylesheet" href="${contextPath}/resources/style/bootswatch.min.css" />
+<link rel="stylesheet" href="${contextPath}/resources/style/custom.css" />
+<script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/highlight/highlight.pack.js"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -38,7 +38,7 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-50816776-2', 'auto');
+  ga('create', 'UA-50816776-3', 'auto');
   ga('send', 'pageview');
 
 </script>

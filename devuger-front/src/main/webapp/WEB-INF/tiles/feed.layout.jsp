@@ -1,12 +1,43 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<jsp:scriptlet>
-	pageContext.setAttribute("crlf", "\n");
-</jsp:scriptlet>
+<%@ taglib prefix="compress" uri="http://htmlcompressor.googlecode.com/taglib/compressor" %>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<tiles:insertAttribute name="layout.head" />
+</head>
+<body>
+<compress:html>
+<!--[if lt IE 8]>
+<script type="text/javascript">
+if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년된 브라우저를 사용하고 계십니다.\n최신 브라우저로 업데이트 하시면 더 나은 재미와 쇼핑을 즐길수 있습니다.\n\n업데이트 하러가시겠습니다?")) {
+  window.location = 'http://windows.microsoft.com/ko-kr/internet-explorer/download-ie';
+}
+</script>
+<![endif]-->
+<tiles:insertAttribute name="layout.navbar" />
+
+<div class="container">
+
+	<c:if test="${og ne null}">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="alert alert-dismissable alert-${og.result}">
+			  <button type="button" class="close" data-dismiss="alert">×</button>
+			  ${og.message}
+			</div>
+		</div>
+	</div>
+	</c:if>		
+	
+	<div class="row">
+		<div class="col-lg-12">
+
 <div class="container">
 	<div class="row">
 			<div class="col-lg-2">
@@ -75,6 +106,7 @@
 
 				<!-- 피드 리스트 시작 -->
 				<div id="feeds">
+					<tiles:insertAttribute name="layout.content" />
 				</div>
 				<!-- 피드 리스트 끝 -->
 			</div>
@@ -170,43 +202,50 @@ var isLoad = false;
 
 $(function() {
 
-  feeds(currentPage);
   $('.float').affix();
 	$('textarea').autosize();
 
-  $(window).scroll(function() {
-    if($(window).scrollTop() >= $(document).height() - $(window).height() && isLastPage == false) {
-      if (!isLastPage) {
-        feeds(currentPage);
-      }
-    }
+  $('div[data-spy="affix"]').each(function() {
+    $(this).width($(this).parent().width());
   });
   
-  $(document).on('click', '.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]', function(event) {
+  $("#feeds").autolink();
+  $("#feeds .timeago").timeago();
+  $("#feeds pre code").each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
+  
+  $("#feeds pre").readmore({
+    speed: 75,
+    heightMargin: 100,
+    moreLink: '<a href="javascript:void(0);" class="btn-link btn-xs">더보기</a>',
+		lessLink: '<a href="javascript:void(0);" class="btn-link btn-xs">닫기</a>'
+  });
+
+  $('.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]').on('click', function(event) {
 
     var $panel = $(this).closest('.panel-google-plus');
     $comment = $panel.find('.panel-google-plus-comment');
+
     $comment.find('.btn:first-child').addClass('disabled');
     $comment.find('textarea').val('');
+
     $panel.toggleClass('panel-google-plus-show-comment');
+
     if ($panel.hasClass('panel-google-plus-show-comment')) {
       $comment.find('textarea').focus();
     }
   });
 
-	$(document).on('keyup', '.panel-google-plus-comment > .panel-google-plus-textarea > textarea', function(event) {
+	$('.panel-google-plus-comment > .panel-google-plus-textarea > textarea').on('keyup', function(event) {
+    var $comment = $(this).closest('.panel-google-plus-comment');
 
-	  var $comment = $(this).closest('.panel-google-plus-comment');
     $comment.find('button[type="submit"]').addClass('disabled');
     if ($(this).val().length >= 1) {
       $comment.find('button[type="submit"]').removeClass('disabled');
     }
   });
-  
-  $('div[data-spy="affix"]').each(function() {
-    $(this).width($(this).parent().width());
-  });
-  
+
   $(".remove").click(function (e) {
   	e.preventDefault();
     if(confirm("삭제하시겠습니까?")) {
@@ -227,58 +266,40 @@ $(function() {
   	return false;
   });
 });
-
-function feeds(page) {
-
-  if (isLoad == true) {
-    return; 
-  } else {
-    isLoad = true;
-  }
-
-  $.ajax({
-      url : "${contextPath}/feeds?layout=none&page={0}".format(page),
-      type : "get",
-    	dataType : "html",
-      beforeSend: function( xhr ) {
-        $('<div id="ajax-load-image" class="text-center"><img src="${contextPath}/resources/img/ajax-load.gif" /></div>').appendTo("#feeds");
-      },
-      success : function(result) {
-        
-        var html = result.trim();
-        if(html.length == 0) {
-          isLastPage = true;
-        }
-
-        initHtml(html);
-        currentPage++;
-
-        $("#ajax-load-image").remove();
-        isLoad = false;
-      }
-    });
-}
-
-function initHtml(html) {
-  
-  $(html).appendTo("#temp");
-  $("#temp").autolink();
-  $("#temp .timeago").timeago();
-  $("#temp pre code").each(function(i, block) {
-    hljs.highlightBlock(block);
-  });
-  
-  html = $("#temp").html();
-  $(html).appendTo("#feeds");
-  $("#temp").html("");
-
-  $("#feeds pre").readmore({
-    speed: 75,
-    heightMargin: 100,
-    moreLink: '<a href="javascript:void(0);" class="btn-link btn-xs">더보기</a>',
-		lessLink: '<a href="javascript:void(0);" class="btn-link btn-xs">닫기</a>'
-  });
-
-}
 </script>
 <div id="temp"></div>
+
+		</div>
+	</div>
+
+	<footer>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<hr/>
+				<div class="pull-left">
+					<p><small>© Copyright 2014 Devuger - All rights reserved.</small></p>
+				</div>
+
+			</div>
+		</div>
+
+	</footer>
+
+</div>
+</compress:html>
+<script src="${contextPath}/resources/js/jquery.autolink.js"></script>
+<script src="${contextPath}/resources/js/jquery.autosize.min.js"></script>
+<script src="${contextPath}/resources/js/timeago/jquery.timeago.js"></script>
+<script src="${contextPath}/resources/js/timeago/locales/jquery.timeago.ko.js"></script>
+<script src="${contextPath}/resources/js/readmore.min.js"></script>
+<script src="${contextPath}/resources/style/bootstrap.min.js"></script>
+<script src="${contextPath}/resources/js/common.js"></script>
+<script type="text/javascript"> 
+//Just to fix IE issues when console isn't defined, only used for the demo - not required for the slider
+if (typeof console === "undefined" || typeof console.log === "undefined") {
+    console = { log: function(){} };
+}
+</script> 
+</body>
+</html>

@@ -35,6 +35,7 @@ import com.devuger.common.entities.Feed;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
 import com.devuger.common.support.base.BaseResult;
+import com.devuger.front.common.session.UserSession;
 
 /**
  * Handles requests for the application home page.
@@ -65,7 +66,7 @@ public class HomeController extends BaseController {
   @RequestMapping(value = "/opengraph")
   public BaseResult signin(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    User user = userService.signup(null, request.getRemoteAddr());
+    User user = UserSession.isSignin(request);
 
     String getUrl = request.getParameter("url");
 
@@ -144,7 +145,7 @@ public class HomeController extends BaseController {
               int height = bimg.getHeight();
               if (width > 300 && height > 300) {
                 bufferedInputStream.reset();
-                attachments.add(attachmentService.upload(user, connection, bufferedInputStream, "products", "main", null, 0, width, height, null));
+                attachments.add(attachmentService.upload(user, connection, bufferedInputStream, 0, width, height));
               }
 
               bufferedInputStream.close();

@@ -32,7 +32,7 @@ public class Attachment extends AbstractEntity implements Serializable {
    */
   private static final long serialVersionUID = -6407247111414717647L;
   @ManyToOne
-  @JoinColumn(name = "feed", nullable = false)
+  @JoinColumn(name = "feed", nullable = true)
   private Feed feed;
   private String name;
 	private long size;

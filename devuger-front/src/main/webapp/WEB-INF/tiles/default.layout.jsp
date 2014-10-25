@@ -10,7 +10,6 @@
 <html lang="ko">
 <head>
 	<tiles:insertAttribute name="layout.head" />
-	<link rel="stylesheet" href="<c:url value="/resources/style/custom.css" />">
 </head>
 <body>
 <compress:html>
@@ -27,7 +26,7 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 
 	<c:if test="${og ne null}">
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-lg-12">
 			<div class="alert alert-dismissable alert-${og.result}">
 			  <button type="button" class="close" data-dismiss="alert">×</button>
 			  ${og.message}
@@ -37,7 +36,7 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 	</c:if>		
 	
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-lg-12">
 			<tiles:insertAttribute name="layout.content" />
 		</div>
 	</div>
@@ -45,7 +44,7 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 	<footer>
 
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-lg-12">
 				<hr/>
 				<div class="pull-left">
 					<p><small>© Copyright 2014 Devuger - All rights reserved.</small></p>
@@ -58,12 +57,12 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 
 </div>
 </compress:html>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.autolink.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.autosize.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/timeago/jquery.timeago.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/timeago/locales/jquery.timeago.ko.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/readmore.min.js"/>"></script>
-<script src="//getbootstrap.com/dist/js/bootstrap.min.js"></script>
+<script src="${contextPath}/resources/js/jquery.autolink.js"></script>
+<script src="${contextPath}/resources/js/jquery.autosize.min.js"></script>
+<script src="${contextPath}/resources/js/timeago/jquery.timeago.js"></script>
+<script src="${contextPath}/resources/js/timeago/locales/jquery.timeago.ko.js"></script>
+<script src="${contextPath}/resources/js/readmore.min.js"></script>
+<script src="${contextPath}/resources/style/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/common.js"></script>
 <script type="text/javascript"> 
 //Just to fix IE issues when console isn't defined, only used for the demo - not required for the slider

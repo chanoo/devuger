@@ -9,7 +9,6 @@
 <html lang="ko">
 <head>
 	<tiles:insertAttribute name="layout.head" />
-	<link rel="stylesheet" href="<c:url value="/resources/style/custom.css" />">
 </head>
 <body style="background-color:transparent;padding-top:20px;" >
 
@@ -19,7 +18,7 @@
 
 <%-- 		<c:if test="${message ne null}">
 			<div class="row">
-				<div class="col-xs-9">
+				<div class="col-lg-9">
 					<div class="alert alert-dismissable alert-success">
 						<button type="button" class="close" data-dismiss="alert">×</button>
 						<span id="message">${message}</span>
