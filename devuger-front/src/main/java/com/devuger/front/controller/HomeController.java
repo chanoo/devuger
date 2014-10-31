@@ -60,8 +60,29 @@ public class HomeController extends BaseController {
     
 		return "index";
 	}
+	
+	/**
+	 * 구글용 사이트맵
+	 * 
+	 * @param request
+	 * @param model
+	 * @param comment
+	 * @return
+	 */
+  @RequestMapping(value = "/sitemap", method = RequestMethod.GET)
+  public String sitemapView(HttpServletRequest request) {
+    
+    return "none.sitemap";
+  }
 
-
+  /**
+   * Open Graph 기반 사이트 정보 가져오기
+   * 
+   * @param request
+   * @param response
+   * @return
+   * @throws IOException
+   */
   @ResponseBody
   @RequestMapping(value = "/opengraph")
   public BaseResult signin(HttpServletRequest request, HttpServletResponse response) throws IOException {

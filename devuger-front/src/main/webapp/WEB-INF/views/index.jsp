@@ -73,7 +73,6 @@
 
 				</div>
 
-				<!-- 피드 리스트 시작 -->
 				<div id="feeds">
 				</div>
 				<!-- 피드 리스트 끝 -->
@@ -267,9 +266,11 @@ function initHtml(html) {
   $("#temp pre code").each(function(i, block) {
     hljs.highlightBlock(block);
   });
-  
+  $('#temp .google-ads ins').each(function(){
+    (adsbygoogle = window.adsbygoogle || []).push({});
+	});
   html = $("#temp").html();
-  $(html).appendTo("#feeds");
+  $(html).appendTo("#feeds");  
   $("#temp").html("");
 
   $("#feeds pre").readmore({

@@ -57,10 +57,10 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 
 </div>
 </compress:html>
-<script src="${contextPath}/resources/js/jquery.autolink.js"></script>
+<script async src="${contextPath}/resources/js/jquery.autolink.js"></script>
+<script async src="${contextPath}/resources/js/timeago/jquery.timeago.js"></script>
+<script async src="${contextPath}/resources/js/timeago/locales/jquery.timeago.ko.js"></script>
 <script src="${contextPath}/resources/js/jquery.autosize.min.js"></script>
-<script src="${contextPath}/resources/js/timeago/jquery.timeago.js"></script>
-<script src="${contextPath}/resources/js/timeago/locales/jquery.timeago.ko.js"></script>
 <script src="${contextPath}/resources/js/readmore.min.js"></script>
 <script src="${contextPath}/resources/style/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/common.js"></script>

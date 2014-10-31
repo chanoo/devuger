@@ -2,6 +2,7 @@ package com.devuger.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -24,6 +25,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+@SuppressWarnings("restriction")
 public class HelloUtil {
 	
 	/**
@@ -37,7 +39,7 @@ public class HelloUtil {
 		
 		String attachmentDirPath = getAttachmentDirPath(date);
 
-		return String.format("/%s/%s", attachmentDirPath, id.toString());
+		return String.format("%s/%s", attachmentDirPath, id.toString());
 	}
 
 	/**
@@ -54,7 +56,7 @@ public class HelloUtil {
 		int year  = today.get(Calendar.YEAR);
 		int month = today.get(Calendar.MONTH) + 1;
 
-		return String.format("%s/%d/%d", "/data", year, month);
+		return String.format("%s/data/%d/%d", System.getProperty("user.home"), year, month);
 	}
 
 	public static String getIp() {		

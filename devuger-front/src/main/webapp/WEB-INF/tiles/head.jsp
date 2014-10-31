@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="${contextPath}/resources/style/custom.css" />
 <script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/highlight/highlight.pack.js"></script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

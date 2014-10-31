@@ -2,6 +2,7 @@ package com.devuger.common.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,12 +23,16 @@ public class OpenGraph extends AbstractEntity implements Serializable {
   @ManyToOne
   @JoinColumn(name = "feed", nullable = false)
   private Feed feed;
+  @Column(nullable=false)
+  private String url;
+  @Column(nullable=false)
+  private String siteName;
+  @Column(nullable=false)
   private String title;
-	private String siteName;
-	private String image;
-	private String description;
-	private String message;
-	private String url;
+  @Column(nullable=true)
+  private String description;
+  @Column(nullable=true)
+  private String image;
 	public Feed getFeed() {
     return feed;
   }
@@ -57,12 +62,6 @@ public class OpenGraph extends AbstractEntity implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
 	}
   public String getUrl() {
     return url;

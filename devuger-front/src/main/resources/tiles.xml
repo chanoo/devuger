@@ -17,10 +17,10 @@
 	</definition>
 
 	<definition name="feed.*" extends="feed.layout">
-		<put-attribute name="layout.content" value="/WEB-INF/views/feed.{1}.jsp"></put-attribute>
+		<put-attribute name="layout.content" value="/WEB-INF/views/{1}.jsp"></put-attribute>
 	</definition>
 
-	<definition name="none.*" template="/WEB-INF/views/none.{1}.jsp" />
+	<definition name="none.*" template="/WEB-INF/views/{1}.jsp" />
 
 	<definition name="*" extends="default.layout">
 		<put-attribute name="layout.content" value="/WEB-INF/views/{1}.jsp"></put-attribute>

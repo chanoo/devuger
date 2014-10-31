@@ -74,12 +74,12 @@ public class FeedController extends BaseController {
 
     model.addAttribute("feeds", feeds);
     model.addAttribute("page", page);
-
-    if (layout.equals("feed")) {
-      return "feed.feeds";
+    model.addAttribute("layout", layout);
+    if (!layout.equals("feed")) {
+      return "none.feeds";
     }
-    
-    return "none.feeds";
+
+    return "feed.feeds";
   }
 
   /**
