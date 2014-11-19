@@ -6,7 +6,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <div class="row">
 
-	<div class="col-lg-6 col-lg-offset-3">
+	<div class="col-xs-6 col-xs-offset-3">
 		<div class="panel panel-primary">
 			<div class="panel-body">
 
@@ -28,22 +28,22 @@
 						<form:hidden path="redirect" />
 						<fieldset>
 							<div class="form-group">
-								<form:label path="email" cssClass="col-lg-3 control-label">이메일</form:label>
-								<div class="col-lg-9">
+								<form:label path="email" cssClass="col-xs-3 control-label">이메일</form:label>
+								<div class="col-xs-9">
 									<form:input path="email" class="form-control" />
 									<small><form:errors path="email" cssClass="error" /></small>
 								</div>
 							</div>
 							<div class="form-group">
-								<form:label path="hashedPassword" cssClass="col-lg-3 control-label">비밀번호</form:label>
-								<div class="col-lg-9">
+								<form:label path="hashedPassword" cssClass="col-xs-3 control-label">비밀번호</form:label>
+								<div class="col-xs-9">
 									<form:password path="hashedPassword" class="form-control"/>
 									<small><form:errors path="hashedPassword" cssClass="error" /></small>
 								</div>
 							</div>
 							<hr/>
 							<div class="form-group">
-								<div class="col-lg-9 col-lg-offset-3">
+								<div class="col-xs-9 col-xs-offset-3">
 									<form:button class="btn btn-primary btn-block">로그인</form:button>
 								</div>
 							</div>

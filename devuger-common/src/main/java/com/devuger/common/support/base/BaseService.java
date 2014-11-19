@@ -8,6 +8,7 @@ import com.devuger.common.repositories.DeviceRepository;
 import com.devuger.common.repositories.FeedRepository;
 import com.devuger.common.repositories.LikeRepository;
 import com.devuger.common.repositories.SourceRepository;
+import com.devuger.common.repositories.TagRepository;
 import com.devuger.common.repositories.UserRepository;
 
 public class BaseService extends BaseObject {
@@ -18,6 +19,7 @@ public class BaseService extends BaseObject {
   @Autowired protected FeedRepository feedRepository;
   @Autowired protected LikeRepository likeRepository;
   @Autowired protected SourceRepository sourceRepository;
+  @Autowired protected TagRepository tagRepository;
   @Autowired protected UserRepository userRepository;
 
 }

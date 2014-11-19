@@ -9,16 +9,16 @@
 </jsp:scriptlet>
 <div class="container">
 	<div class="row">
-			<div class="col-lg-2">
+			<div class="col-xs-2">
 				<div class="text-right float" data-spy="affix" data-offset-top="60">
 
 					<dl>
 						<dt>그룹</dt>
-						<dd><a href="#">아이폰</a></dd>
-						<dd><a href="#">안드로이드</a></dd>
-						<dd><a href="#">프론트엔드</a></dd>
-						<dd><a href="#">백엔드</a></dd>
-						<dd><a href="#">구인구직</a></dd>
+						<dd><a href="javascript:feeds(1, 1);">아이폰</a></dd>
+						<dd><a href="javascript:feeds(2, 1);">안드로이드</a></dd>
+						<dd><a href="javascript:feeds(3, 1);">자바</a></dd>
+						<dd><a href="javascript:feeds(4, 1);">HTML/자바스크립트</a></dd>
+						<dd><a href="javascript:feeds(5, 1);">백앤드서버</a></dd>
 					</dl>
 	
 					<dl>
@@ -39,26 +39,33 @@
 				</div>
 			</div>
 	
-			<div class="col-lg-6">
+			<div class="col-xs-7">
+
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-xs-12">
 
 						<div class="panel panel-default">
 						  <div class="panel-body animated">
 						  	<form:form cssClass="form-horizontal" action="${contextPath}/feeds/add.json" id="feed-form">
+						  		<input type="hidden" name="tag.id" id="tag.id" value="${tag.id}" />
 							    <div class="form-group">
-							      <div class="col-lg-12">
-								  		<textarea name="message" placeholder="지금 하고 싶은 이야기나 공유하고 싶은 정보를 적어주세요!" rows="2" cols="200" class="form-control animated"></textarea>
+							      <div class="col-xs-12">
+							      	<c:if test="${user eq null}">
+									  		<textarea name="message" placeholder="로그인 후 작성 해주세요." disabled="disabled" rows="2" cols="200" class="form-control animated"></textarea>
+							      	</c:if>
+							      	<c:if test="${user ne null}">
+									  		<textarea name="message" placeholder="지금 하고 싶은 이야기나 공유하고 싶은 정보를 적어주세요!" rows="2" cols="200" class="form-control animated"></textarea>
+							      	</c:if>
 								  	</div>
 						  		</div>
 						  		<div id="source">
 						  		</div>
 									<div class="form-group">
-										<div class="col-lg-7">
+										<div class="col-xs-7">
 											<a href="javascript:void(0);" id="add-file" class="btn btn-primary btn-xs">+ 파일</a>
 											<a href="javascript:void(0);" id="add-code" class="btn btn-primary btn-xs">+ 코드</a>
 										</div>
-										<div class="col-lg-5 text-right">
+										<div class="col-xs-5 text-right">
 											<button type="reset" class="btn btn-link btn-xs">취소</button>
 											<button type="submit" class="btn btn-success btn-xs">게시</button>
 										</div>
@@ -74,15 +81,26 @@
 				</div>
 
 				<div id="feeds">
+					<div class="row google-ads">
+						<div class="col-xs-12">
+							<div class="panel panel-default">
+								<div class="panel-body text-center">
+									<ins class="adsbygoogle"
+										style="display: inline-block; width: 468px; height: 60px"
+										data-ad-client="ca-pub-3314889605614283" data-ad-slot="1330578984"></ins>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- 피드 리스트 끝 -->
 			</div>
-			<div class="col-lg-4">
+			<div class="col-xs-3">
 				<div class="float" data-spy="affix" data-offset-top="60">			
 			
 					<div class="panel panel-default">
 					  <div class="panel-body">
-						  <span>
+							<small>
 						  	개발 진행중인 웹사이트입니다.<br/>
 						  	<br/>
 								2014년 9월 말, 사무실에 앉아서 계속 한가지 일만 하다보니 재미 없어서 또 다른 뭔가를 찾다가 SNS 프로젝트를 시작합니다!<br/>
@@ -91,20 +109,7 @@
 								<br/>
 								github를 통해 사이트 전체 소스코드를 받을 수 있습니다.<br/>
 								<br/>
-							</span>
-							<hr/>
-							<div class="well">
-	
-						  	<h3>To do</h3>
-						  	<ol>
-						  		<li>회원 수정/탈퇴</li>
-						  		<li>페이스북 로그인/공유</li>
-						  		<li>피드 수정/삭제</li>
-						  		<li>팔로워/팔로윙 추가/삭제</li>
-						  	</ol>
-	
-							</div>
-	
+							</small>	
 					  </div>
 					</div>
 
@@ -125,12 +130,12 @@ $("#add-code").click(function() {
   var html = "";
 	html += '<div class="well">';
 	html += '  <div class="form-group">';
-	html += '    <div class="col-lg-12">';
+	html += '    <div class="col-xs-12">';
 	html += '  		<textarea name="source.code" placeholder="코드를 입력해주세요." rows="4" cols="200" class="form-control animated"></textarea>';
 	html += '  	</div>';
 	html += '	</div>';
 	html += '  <div class="form-group">';
-	html += '    <div class="col-lg-12">';
+	html += '    <div class="col-xs-12">';
 	html += '  		<input type="text" name="source.comment" placeholder="코드 코멘트" class="form-control"></textarea>';
 	html += '  	</div>';
 	html += '	</div>';
@@ -163,20 +168,21 @@ $("#feed-form").submit(function() {
 	return false;
 });
 
+var currentTag = null;
 var currentPage = 1;
 var isLastPage = false;
 var isLoad = false;
 
 $(function() {
 
-  feeds(currentPage);
+  feeds(currentTag, currentPage);
   $('.float').affix();
 	$('textarea').autosize();
 
   $(window).scroll(function() {
     if($(window).scrollTop() >= $(document).height() - $(window).height() && isLastPage == false) {
       if (!isLastPage) {
-        feeds(currentPage);
+        feeds(currentTag, currentPage);
       }
     }
   });
@@ -227,16 +233,28 @@ $(function() {
   });
 });
 
-function feeds(page) {
+function feeds(tag, page) {
 
+  this.currentTag = tag;
+  this.currentPage = page;
+  if (page == 1) {
+    isLastPage = false;
+    $("#feeds").html("");
+    $("#tag\\.id").val(tag);
+  }
+  
   if (isLoad == true) {
     return; 
   } else {
     isLoad = true;
   }
+  
+  var feedUrl = "${contextPath}/feeds?layout=none&page={0}".format(page);
+  if(tag != null)
+    feedUrl = "${contextPath}/feeds?layout=none&tag.id={0}&page={1}".format(tag, page);
 
   $.ajax({
-      url : "${contextPath}/feeds?layout=none&page={0}".format(page),
+      url : feedUrl,
       type : "get",
     	dataType : "html",
       beforeSend: function( xhr ) {

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -31,7 +31,7 @@ public class Source extends AbstractEntity implements Serializable {
    */
   private static final long serialVersionUID = -1907218816750055462L;
 
-  @ManyToOne
+  @OneToOne
   @JoinColumn(name = "feed", nullable = false)
   private Feed feed;
   @JsonIgnore

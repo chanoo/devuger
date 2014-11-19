@@ -26,7 +26,7 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 
 	<c:if test="${og ne null}">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-xs-12">
 			<div class="alert alert-dismissable alert-${og.result}">
 			  <button type="button" class="close" data-dismiss="alert">×</button>
 			  ${og.message}
@@ -36,20 +36,20 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 	</c:if>		
 	
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-xs-12">
 
 <div class="container">
 	<div class="row">
-			<div class="col-lg-2">
+			<div class="col-xs-2">
 				<div class="text-right float" data-spy="affix" data-offset-top="60">
 
 					<dl>
 						<dt>그룹</dt>
-						<dd><a href="#">아이폰</a></dd>
-						<dd><a href="#">안드로이드</a></dd>
-						<dd><a href="#">프론트엔드</a></dd>
-						<dd><a href="#">백엔드</a></dd>
-						<dd><a href="#">구인구직</a></dd>
+						<dd><a href="javascript:feeds(1, 1);">아이폰</a></dd>
+						<dd><a href="javascript:feeds(2, 1);">안드로이드</a></dd>
+						<dd><a href="javascript:feeds(3, 1);">자바</a></dd>
+						<dd><a href="javascript:feeds(4, 1);">HTML/자바스크립트</a></dd>
+						<dd><a href="javascript:feeds(5, 1);">구인구직</a></dd>
 					</dl>
 	
 					<dl>
@@ -70,26 +70,26 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 				</div>
 			</div>
 	
-			<div class="col-lg-6">
+			<div class="col-xs-6">
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-xs-12">
 
 						<div class="panel panel-default">
 						  <div class="panel-body animated">
 						  	<form:form cssClass="form-horizontal" action="${contextPath}/feeds/add.json" id="feed-form">
 							    <div class="form-group">
-							      <div class="col-lg-12">
+							      <div class="col-xs-12">
 								  		<textarea name="message" placeholder="지금 하고 싶은 이야기나 공유하고 싶은 정보를 적어주세요!" rows="2" cols="200" class="form-control animated"></textarea>
 								  	</div>
 						  		</div>
 						  		<div id="source">
 						  		</div>
 									<div class="form-group">
-										<div class="col-lg-7">
+										<div class="col-xs-7">
 											<a href="javascript:void(0);" id="add-file" class="btn btn-primary btn-xs">+ 파일</a>
 											<a href="javascript:void(0);" id="add-code" class="btn btn-primary btn-xs">+ 코드</a>
 										</div>
-										<div class="col-lg-5 text-right">
+										<div class="col-xs-5 text-right">
 											<button type="reset" class="btn btn-link btn-xs">취소</button>
 											<button type="submit" class="btn btn-success btn-xs">게시</button>
 										</div>
@@ -110,7 +110,7 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 				</div>
 				<!-- 피드 리스트 끝 -->
 			</div>
-			<div class="col-lg-4">
+			<div class="col-xs-4">
 				<div class="float" data-spy="affix" data-offset-top="60">			
 			
 					<div class="panel panel-default">
@@ -158,12 +158,12 @@ $("#add-code").click(function() {
   var html = "";
 	html += '<div class="well">';
 	html += '  <div class="form-group">';
-	html += '    <div class="col-lg-12">';
+	html += '    <div class="col-xs-12">';
 	html += '  		<textarea name="source.code" placeholder="코드를 입력해주세요." rows="4" cols="200" class="form-control animated"></textarea>';
 	html += '  	</div>';
 	html += '	</div>';
 	html += '  <div class="form-group">';
-	html += '    <div class="col-lg-12">';
+	html += '    <div class="col-xs-12">';
 	html += '  		<input type="text" name="source.comment" placeholder="코드 코멘트" class="form-control"></textarea>';
 	html += '  	</div>';
 	html += '	</div>';
@@ -275,7 +275,7 @@ $(function() {
 	<footer>
 
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-xs-12">
 				<hr/>
 				<div class="pull-left">
 					<p><small>© Copyright 2014 Devuger - All rights reserved.</small></p>

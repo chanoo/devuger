@@ -8,9 +8,24 @@
 <jsp:scriptlet>
 	pageContext.setAttribute("crlf", "\n");
 </jsp:scriptlet>
-<c:forEach items="${feeds.content}" var="feed">
+<c:forEach items="${feeds.content}" var="feed" varStatus="i">
+	<!-- 한페이지에 구글 애드센스를 3개 이상 표시 할 수 없다. -->
+	<c:if test="${i.count eq 3 && page < 3}">
+	<div class="row google-ads">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-body text-center">
+					<ins class="adsbygoogle"
+					     style="display:inline-block;width:468px;height:60px"
+					     data-ad-client="ca-pub-3314889605614283"
+					     data-ad-slot="1330578984"></ins>
+				</div>
+			</div>
+		</div>
+	</div>
+	</c:if>
 <div class="row" id="feed-${feed.id}">
-	<div class="col-lg-12">
+	<div class="col-xs-12">
 		<div class="[ panel panel-default ] panel-google-plus">
 			<div class="dropdown">
 				<span class="dropdown-toggle" type="button" data-toggle="dropdown">
@@ -27,7 +42,7 @@
 			</div>
 			<div class="panel-google-plus-tags">
 				<ul>
-					<li>#Millennials</li>
+					<li>#${feed.tag.name}</li>
 					<li>#Generation</li>
 				</ul>
 			</div>
@@ -97,22 +112,9 @@ ${source.codeEscape}
 	</div>
 </div>
 </c:forEach>
-<c:if test="${fn:length(feeds.content) ne 0 && page < 3}">
-<div class="row">
-	<div class="col-lg-12 google-ads">
-		<div class="panel panel-default">
-			<div class="panel-body text-center">
-				<ins class="adsbygoogle"
-					style="display: inline-block; width: 468px; height: 60px"
-					data-ad-client="ca-pub-3314889605614283" data-ad-slot="1330578984"></ins>
-			</div>
-		</div>
-	</div>
-</div>
-</c:if>
 <c:if test="${layout eq 'feed'}">
 <div class="row">
-	<div class="col-lg-12 text-center">
+	<div class="col-xs-12 text-center">
 		<hello:pagination currentPage="${page}" totalElements="${feeds.totalElements}" url="${contextPath}/feeds?page=" pageSize="5"></hello:pagination>
 	</div>
 </div>

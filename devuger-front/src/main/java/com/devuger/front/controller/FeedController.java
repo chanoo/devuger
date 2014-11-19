@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +23,7 @@ import com.devuger.common.entities.Comment;
 import com.devuger.common.entities.Feed;
 import com.devuger.common.entities.Like;
 import com.devuger.common.entities.Source;
+import com.devuger.common.entities.Tag;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
 import com.devuger.common.support.base.BaseResult;
@@ -56,9 +58,16 @@ public class FeedController extends BaseController {
     
     int page = ServletRequestUtils.getIntParameter(request, "page", 1);
     String layout = ServletRequestUtils.getStringParameter(request, "layout", "feed");
+    Long tagId = ServletRequestUtils.getLongParameter(request, "tag.id");
 
     User createdBy = UserSession.get(request);
-    Page<Feed> feeds = feedService.getAll(page);
+    Page<Feed> feeds = null;
+    if (tagId == null) {
+      feeds = feedService.getAll(page);
+    } else {
+      Tag tag = tagService.get(tagId);
+      feeds = feedService.getByTag(tag, page);
+    }
     if (!feeds.getContent().isEmpty()) {
       List<Like> likes = likeService.getByCreatedByAndFeed(createdBy, feeds.getContent());
       for(Feed feed : feeds) {
@@ -97,6 +106,10 @@ public class FeedController extends BaseController {
   throws IOException {
 
     User user = UserSession.isSignin(request);
+    this.getLogger().debug(feed.getTag().getId().toString());
+    Tag tag = tagService.get(feed.getTag().getId());
+    Assert.notNull(tag, "태그 정보가 없습니다.");
+    feed.setTag(tag);
     feed = feedService.add(feed, user);
     
     String[] codes = ServletRequestUtils.getStringParameters(request, "source.code");

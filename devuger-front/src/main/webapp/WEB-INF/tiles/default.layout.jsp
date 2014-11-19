@@ -26,7 +26,7 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 
 	<c:if test="${og ne null}">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-xs-12">
 			<div class="alert alert-dismissable alert-${og.result}">
 			  <button type="button" class="close" data-dismiss="alert">×</button>
 			  ${og.message}
@@ -36,7 +36,7 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 	</c:if>		
 	
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-xs-12">
 			<tiles:insertAttribute name="layout.content" />
 		</div>
 	</div>
@@ -44,7 +44,7 @@ if(confirm("WIMITT에서 더 나은 쇼핑을 경험하기에 고객님은 10년
 	<footer>
 
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-xs-12">
 				<hr/>
 				<div class="pull-left">
 					<p><small>© Copyright 2014 Devuger - All rights reserved.</small></p>

@@ -1,9 +1,16 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700);
 
 body {
-    background-color: rgb(229, 229, 229);
-    padding-top: 60px;
-    padding-bottom: 30px;
+	background-color: rgb(229, 229, 229);
+  min-width: 1000px;
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+/* Reset the container */
+.container {
+  width: 1000px;
+  max-width: none !important;
 }
 
 .animated {

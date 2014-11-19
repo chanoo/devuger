@@ -18,20 +18,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.devuger.common.entities.Attachment;
-import com.devuger.common.entities.Comment;
-import com.devuger.common.entities.Feed;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseController;
 import com.devuger.common.support.base.BaseResult;
@@ -49,15 +46,15 @@ public class HomeController extends BaseController {
    * @param request
    * @param model
    * @return
+   * @throws ServletRequestBindingException 
    */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest request, Model model, @ModelAttribute Comment comment) {
+	public String home(HttpServletRequest request, Model model)
+	throws ServletRequestBindingException {
 	  
-	  int page = ServletRequestUtils.getIntParameter(request, "page", 1);
-
-    Page<Feed> feeds = feedService.getAll(page);
-    model.addAttribute("feeds", feeds);
-    
+	  Long tagId = ServletRequestUtils.getLongParameter(request, "tag.id");
+	  model.addAttribute("tag.id", tagId);
+	  
 		return "index";
 	}
 	

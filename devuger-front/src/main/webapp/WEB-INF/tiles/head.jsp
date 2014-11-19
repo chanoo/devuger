@@ -20,14 +20,15 @@
 <meta property="og:description" content="${og.description}" />
 </c:if>	
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="${contextPath}/resources/css/font-awesome.min.css" />
 <link rel="stylesheet" href="${contextPath}/resources/js/highlight/styles/default.css" />
 <link rel="stylesheet" href="${contextPath}/resources/style/bootstrap.css" />
 <link rel="stylesheet" href="${contextPath}/resources/style/bootswatch.min.css" />
 <link rel="stylesheet" href="${contextPath}/resources/style/custom.css" />
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/highlight/highlight.pack.js"></script>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

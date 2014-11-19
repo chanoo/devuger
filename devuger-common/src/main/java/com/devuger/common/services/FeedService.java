@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import com.devuger.common.entities.Feed;
+import com.devuger.common.entities.Tag;
 import com.devuger.common.entities.User;
 import com.devuger.common.support.base.BaseService;
 import com.devuger.common.support.constant.GlobalConst;
@@ -94,5 +95,20 @@ public class FeedService extends BaseService {
     Assert.isTrue(feed.getCreatedBy().equals(user), "삭제할 권한이 없습니다.");
     
     feedRepository.delete(id);
+  }
+
+  /**
+   * 태그로 피드리스트 가져오기
+   * 
+   * @param tag
+   * @param page
+   * @return
+   */
+  public Page<Feed> getByTag(Tag tag, int page) {
+    // TODO Auto-generated method stub
+    Order order = new Order(Direction.DESC, "id");
+    Sort sort = new Sort(order);
+    Pageable pageable = new PageRequest(page - 1, GlobalConst.PAGE_SIZE, sort);
+    return feedRepository.findByTag(tag, pageable);
   }
 }

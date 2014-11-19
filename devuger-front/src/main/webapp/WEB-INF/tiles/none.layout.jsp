@@ -18,7 +18,7 @@
 
 <%-- 		<c:if test="${message ne null}">
 			<div class="row">
-				<div class="col-lg-9">
+				<div class="col-xs-9">
 					<div class="alert alert-dismissable alert-success">
 						<button type="button" class="close" data-dismiss="alert">×</button>
 						<span id="message">${message}</span>

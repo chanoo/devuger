@@ -17,8 +17,8 @@
 		<fieldset>
 	    <legend>판매 상품 정보</legend>
 	   		<div class="form-group">
-				<form:label path="category" class="col-lg-2 control-label">카테고리</form:label>
-				<div class="col-lg-10">
+				<form:label path="category" class="col-xs-2 control-label">카테고리</form:label>
+				<div class="col-xs-10">
 					<form:select path="category" class="form-control">
 						<form:option value="">패션</form:option>
 						<form:option value="">디지털/가전</form:option>
@@ -27,41 +27,41 @@
 			</div>
 			<hr />
 			<div class="form-group">
-				<label for="get_url" class="col-lg-2 control-label">주소(URL)</label>
-				<div class="col-lg-10">
+				<label for="get_url" class="col-xs-2 control-label">주소(URL)</label>
+				<div class="col-xs-10">
 					<input id="get_url" type="text" class="form-control" placeholder="http://"><br/>
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="title" class="col-lg-2 control-label">제목</form:label>
-				<div class="col-lg-10">
+				<form:label path="title" class="col-xs-2 control-label">제목</form:label>
+				<div class="col-xs-10">
 					<form:input path="title" class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="description" class="col-lg-2 control-label">설명</form:label>
-				<div class="col-lg-10">
+				<form:label path="description" class="col-xs-2 control-label">설명</form:label>
+				<div class="col-xs-10">
 					<form:textarea path="description" class="form-control"></form:textarea>
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="price" class="col-lg-2 control-label">판매가</form:label>
-				<div class="col-lg-10">
+				<form:label path="price" class="col-xs-2 control-label">판매가</form:label>
+				<div class="col-xs-10">
 					<form:input path="price" class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="price" class="col-lg-2 control-label">제품 이미지</form:label>
-				<div class="col-lg-10">
+				<form:label path="price" class="col-xs-2 control-label">제품 이미지</form:label>
+				<div class="col-xs-10">
 						<div id="og-images" class="list-unstyled"></div>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-10 col-lg-offset-2">
+				<div class="col-xs-10 col-xs-offset-2">
 					<button type="submit" class="btn btn-primary">등록</button>
 				</div>
 			</div>
-			<div id="status" class="col-lg-12"></div>
+			<div id="status" class="col-xs-12"></div>
 		</fieldset>
 		</form:form>
 	
